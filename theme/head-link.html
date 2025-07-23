@@ -1,0 +1,367 @@
+<!-- App favicon -->
+<link rel="shortcut icon" href="../ ../theme/assets/images/favicon.ico">
+
+<!-- Daterangepicker css -->
+<link href="../ ../theme/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css">
+
+<!-- Vector Map css -->
+<link href="../ ../theme/assets/vendor/jsvectormap/jsvectormap.min.css" rel="stylesheet" type="text/css">
+
+<!-- Theme Config Js -->
+<script src="../ ../theme/assets/js/hyper-config.js"></script>
+
+<!-- Vendor css -->
+<link href="../ ../theme/assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+
+<!-- App css -->
+<link href="../ ../theme/assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+<!-- Icons css -->
+<link href="../ ../theme/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+<!-- ========== Left Sidebar Start ========== -->
+<div class="leftside-menu">
+
+    <!-- Brand Logo Light -->
+    <a href="index.html" class="logo logo-light">
+        <span class="logo-lg">
+            <img src=" ../theme/assets/images/logo.png" alt="logo">
+        </span>
+        <span class="logo-sm">
+            <img src=" ../theme/assets/images/logo-sm.png" alt="small logo">
+        </span>
+    </a>
+
+    <!-- Brand Logo Dark -->
+    <a href="index.html" class="logo logo-dark">
+        <span class="logo-lg">
+            <img src=" ../theme/assets/images/logo-dark.png" alt="dark logo">
+        </span>
+        <span class="logo-sm">
+            <img src=" ../theme/assets/images/logo-dark-sm.png" alt="small logo">
+        </span>
+    </a>
+
+    <!-- Sidebar Hover Menu Toggle Button -->
+    <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right" title="Show Full Sidebar">
+        <i class="ri-checkbox-blank-circle-line align-middle"></i>
+    </div>
+
+    <!-- Full Sidebar Menu Close Button -->
+    <div class="button-close-fullsidebar">
+        <i class="ri-close-fill align-middle"></i>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="h-100" id="leftside-menu-container" data-simplebar>
+        <!-- Leftbar User -->
+        <div class="leftbar-user">
+            <a href="pages-profile.html">
+                <img src=" ../theme/assets/images/users/avatar-1.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                <span class="leftbar-user-name mt-2">Dominic Keller</span>
+            </a>
+        </div>
+
+        <!--- Sidemenu -->
+        <ul class="side-nav">
+
+            <li class="side-nav-title">Navigation</li>
+            <li class="side-nav-item">
+                <a href="../modules/index.php" class="side-nav-link">
+                    <i class="uil-home-alt"></i>
+                    <span> Homepage </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="../modules/ai-chat-dashboard.php" class="side-nav-link">
+                    <i class="uil-tv-retro"></i>
+                    <span> SULAT Demo </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="../modules/canvas-dashboard.php" class="side-nav-link">
+                    <i class="uil-paint-tool"></i>
+                    <span> Canvas Only </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="../modules/chat-dashboard.php" class="side-nav-link">
+                    <i class="uil-robot"></i>
+                    <span> Chatbot Only </span>
+                </a>
+            </li>
+
+            <li class="side-nav-title">Utility</li>
+
+            <li class="side-nav-item">
+                <a href="../modules/screenshot.php" class="side-nav-link">
+                    <i class="uil-comments-alt"></i>
+                    <span> Screenshot </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="../modules/user.php" class="side-nav-link">
+                    <i class="uil-comments-alt"></i>
+                    <span> System User </span>
+                </a>
+            </li>
+
+        </ul>
+        <!--- End Sidemenu -->
+    </div>
+</div>
+<!-- ========== Left Sidebar End ========== -->
+
+<li class="dropdown">
+    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+        <i class="ri-search-line font-22"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-animated p-0">
+        <form class="p-3">
+            <button type="button" class="btn mt-1 btn-success" onclick="fullscreenSnip()">
+                <i class="mdi mdi-content-cut"></i> Fullscreen Snip
+            </button>
+            <button id="captureScreenshot" type="button" class="btn mt-1 btn-warning">
+                <i class="mdi mdi-selection"></i> Region Snip
+            </button>
+        </form>
+    </div>
+</li>
+
+
+<script>
+    function fullscreenSnip() {
+        setTimeout(() => {
+            html2canvas(document.body).then((canvas) => {
+                const image = canvas.toDataURL("image/png");
+                downloadImage(image, "screenshot.png");
+            });
+        }, 500); // 500ms delay
+    }
+
+
+    document.getElementById("captureScreenshot").addEventListener("click", function () {
+        enableSelection();
+    });
+
+    function enableSelection() {
+        let selectionBox = null;
+        let startX, startY, endX, endY;
+        let isSelecting = false;
+
+        const onMouseDown = (e) => {
+            if (e.button !== 0) return;
+            isSelecting = true;
+            startX = e.clientX;
+            startY = e.clientY;
+
+            selectionBox = document.createElement("div");
+            selectionBox.style.position = "absolute";
+            selectionBox.style.border = "2px dashed red";
+            selectionBox.style.background = "rgba(255, 0, 0, 0.2)";
+            selectionBox.style.left = `${startX}px`;
+            selectionBox.style.top = `${startY}px`;
+            document.body.appendChild(selectionBox);
+        };
+
+        const onMouseMove = (e) => {
+            if (!isSelecting || !selectionBox) return;
+            endX = e.clientX;
+            endY = e.clientY;
+
+            selectionBox.style.width = `${Math.abs(endX - startX)}px`;
+            selectionBox.style.height = `${Math.abs(endY - startY)}px`;
+            selectionBox.style.left = `${Math.min(startX, endX)}px`;
+            selectionBox.style.top = `${Math.min(startY, endY)}px`;
+        };
+
+        const onMouseUp = async (e) => {
+            if (!isSelecting) return;
+            isSelecting = false;
+
+            document.removeEventListener("mousedown", onMouseDown);
+            document.removeEventListener("mousemove", onMouseMove);
+            document.removeEventListener("mouseup", onMouseUp);
+
+            if (selectionBox) {
+                document.body.removeChild(selectionBox);
+            }
+
+            const captureArea = {
+                x: Math.min(startX, endX),
+                y: Math.min(startY, endY),
+                width: Math.abs(endX - startX),
+                height: Math.abs(endY - startY)
+            };
+
+            const canvas = await html2canvas(document.body, {
+                x: captureArea.x,
+                y: captureArea.y,
+                width: captureArea.width,
+                height: captureArea.height,
+                scrollX: 0,
+                scrollY: 0
+            });
+
+            openEditor(canvas);
+        };
+
+        document.addEventListener("mousedown", onMouseDown);
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+    }
+
+    function openEditor(canvas) {
+        // Remove any existing modal before adding a new one
+        const existingEditor = document.getElementById("screenshotEditor");
+        if (existingEditor) {
+            existingEditor.remove();
+        }
+
+        const editor = document.createElement("div");
+        editor.id = "screenshotEditor";
+        editor.innerHTML = `
+          <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+              background: white; padding: 20px; border: 1px solid #ccc; z-index: 10000; box-shadow: 0px 0px 10px rgba(0,0,0,0.3);">
+              <canvas id="screenshotCanvas"></canvas>
+              <div style="margin-top: 10px; text-align: right;">
+                  <button id="saveScreenshot">Save</button>
+                  <button id="cancelScreenshot">Cancel</button>
+              </div>
+          </div>
+      `;
+        document.body.appendChild(editor);
+
+        const ctx = editor.querySelector("#screenshotCanvas").getContext("2d");
+        const screenshotCanvas = editor.querySelector("#screenshotCanvas");
+        screenshotCanvas.width = canvas.width;
+        screenshotCanvas.height = canvas.height;
+        ctx.drawImage(canvas, 0, 0);
+
+        document.getElementById("saveScreenshot").addEventListener("click", () => {
+            const link = document.createElement("a");
+            link.href = screenshotCanvas.toDataURL("image/png");
+            link.download = "screenshot.png";
+            link.click();
+            closeEditor();
+        });
+
+        document.getElementById("cancelScreenshot").addEventListener("click", () => {
+            closeEditor();
+        });
+    }
+
+    function closeEditor() {
+        const editor = document.getElementById("screenshotEditor");
+        if (editor) {
+            editor.remove();
+        }
+    }
+
+
+    function downloadImage(dataUrl, filename) {
+        let link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+</script>
+
+
+<!-- App Favicon -->
+<link rel="shortcut icon" href="../theme/assets/images/favicon.ico">
+
+<!-- Core CSS -->
+<link href="../theme/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+<!-- Third Party CSS -->
+<link href="../theme/assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/buttons.bootstrap5.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/select.bootstrap5.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/fixedHeader.bootstrap5.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/fixedColumns.bootstrap5.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/simplemde.min.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/quill.bubble.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/quill.core.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/quill.snow.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+<link href="../theme/assets/css/vendor/frappe-gantt.css" rel="stylesheet" type="text/css" />
+
+<!-- Bundle JS -->
+<script src="../theme/assets/js/vendor.min.js"></script>
+<script src="../theme/assets/js/app.min.js"></script>
+
+<!-- Third Party JS -->
+<script src="../theme/assets/js/vendor/fullcalendar.min.js"></script>
+<script src="../theme/assets/js/vendor/jquery.dataTables.min.js"></script>
+<script src="../theme/assets/js/vendor/dataTables.bootstrap5.js"></script>
+<script src="../theme/assets/js/vendor/dataTables.responsive.min.js"></script>
+<script src="../theme/assets/js/vendor/responsive.bootstrap5.min.js"></script>
+<script src="../theme/assets/js/vendor/dataTables.buttons.min.js"></script>
+<script src="../theme/assets/js/vendor/buttons.bootstrap5.min.js"></script>
+<script src="../theme/assets/js/vendor/buttons.html5.min.js"></script>
+<script src="../theme/assets/js/vendor/buttons.flash.min.js"></script>
+<script src="../theme/assets/js/vendor/buttons.print.min.js"></script>
+<script src="../theme/assets/js/vendor/dataTables.keyTable.min.js"></script>
+<script src="../theme/assets/js/vendor/dataTables.select.min.js"></script>
+<script src="../theme/assets/js/vendor/dataTables.checkboxes.min.js"></script>
+<script src="../theme/assets/js/vendor/fixedColumns.bootstrap5.min.js"></script>
+<script src="../theme/assets/js/vendor/fixedHeader.bootstrap5.min.js"></script>
+<script src="../theme/assets/js/vendor/apexcharts.min.js"></script>
+<script src="../theme/assets/js/vendor/chart.min.js"></script>
+<script src="../theme/assets/js/vendor/dragula.min.js"></script>
+<script src="../theme/assets/js/vendor/dropzone.min.js"></script>
+<script src="../theme/assets/js/vendor/quill.min.js"></script>
+<script src="../theme/assets/js/vendor/simplemde.min.js"></script>
+<script src="../theme/assets/js/vendor/handlebars.min.js"></script>
+<script src="../theme/assets/js/vendor/typeahead.bundle.min.js"></script>
+<script src="../theme/assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="../theme/assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+<script src="https://maps.google.com/maps/api/js"></script>
+<script src="../theme/assets/js/vendor/gmaps.min.js"></script>
+<script src="../theme/assets/js/vendor/frappe-gantt.min.js"></script>
+
+<!-- Demo Page Initializations -->
+<script src="../theme/assets/js/pages/demo.calendar.js"></script>
+<script src="../theme/assets/js/pages/demo.customers.js"></script>
+<script src="../theme/assets/js/pages/demo.products.js"></script>
+<script src="../theme/assets/js/pages/demo.sellers.js"></script>
+<script src="../theme/assets/js/pages/demo.inbox.js"></script>
+<script src="../theme/assets/js/pages/demo.profile.js"></script>
+<script src="../theme/assets/js/pages/demo.dashboard.js"></script>
+<script src="../theme/assets/js/pages/demo.project-detail.js"></script>
+<script src="../theme/assets/js/pages/demo.project-gantt.js"></script>
+<script src="../theme/assets/js/pages/demo.tasks.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-area.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-bar.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-bubble.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-candlestick.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-column.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-heatmap.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-line.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-mixed.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-pie.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-radar.js"></script>
+<script src="../theme/assets/js/pages/demo.apex-radialbar.js"></script>
+<script src="../theme/assets/js/pages/demo.datatable-init.js"></script>
+<script src="../theme/assets/js/pages/demo.toastr.js"></script>
+<script src="../theme/assets/js/pages/demo.typehead.js"></script>
+<script src="../theme/assets/js/pages/demo.timepicker.js"></script>
+<script src="../theme/assets/js/pages/demo.quilljs.js"></script>
+<script src="../theme/assets/js/pages/demo.simplemde.js"></script>
+<script src="../theme/assets/js/pages/demo.form-wizard.js"></script>
+<script src="../theme/assets/js/pages/demo.google-maps.js"></script>
+<script src="../theme/assets/js/pages/demo.materialdesignicons.js"></script>
+
+<!-- UI Components -->
+<script src="../theme/assets/js/ui/component.dragula.js"></script>
+<script src="../theme/assets/js/ui/component.fileupload.js"></script>
