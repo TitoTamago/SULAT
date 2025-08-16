@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+
+    <style>
+        /*********** Blue Bot! ********/
+
+        @keyframes blue-lower-dot1 {
+            0% {
+                background: #2497b4;
+            }
+            50% {
+                background: #e33568;
+            }
+            100% {
+                background: #2497b4;
+            }
+        }
+        @keyframes blue-lower-dot2 {
+            0% {
+                background: #e33568;
+            }
+            50% {
+                background: #2497b4;
+            }
+            100% {
+                background: #e33568;
+            }
+        }
+        @keyframes blue-lower-dot3 {
+            0% {
+                background: #2497b4;
+            }
+            50% {
+                background: #e33568;
+            }
+            100% {
+                background: #2497b4;
+            }
+        }
+        @keyframes blue-mid-dot1 {
+            0% {
+                background: #e33568;
+            }
+            50% {
+                background: #2497b4;
+            }
+            100% {
+                background: #e33568;
+            }
+        }
+        @keyframes blue-mid-dot2 {
+            0% {
+                background: #2497b4;
+            }
+            50% {
+                background: #e33568;
+            }
+            100% {
+                background: #2497b4;
+            }
+        }
+        @keyframes blue-mid-dot3 {
+            0% {
+                background: #e33568;
+            }
+            50% {
+                background: #2497b4;
+            }
+            100% {
+                background: #e33568;
+            }
+        }
+        @keyframes blue-wheel-line1 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #2497b4;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes blue-wheel-line2 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #2497b4;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes blue-wheel-line3 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #2497b4;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes blue-wheel-line4 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #2497b4;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+
+        @keyframes blue-eye {
+            0% {
+                top: 165px;
+                left: 217px;
+            }
+            25% {
+                top: 167px;
+                left: 219px;
+            }
+            50% {
+                top: 165px;
+                left: 221px;
+            }
+            75% {
+                top: 167px;
+                left: 219px;
+            }
+            100% {
+                top: 165px;
+                left: 217px;
+            }
+        }
+
+        @keyframes blue-top-box {
+            0% {
+                top: 195px;
+                left: 200px;
+            }
+            50% {
+                top: 195px;
+                left: 292px;
+            }
+            100% {
+                top: 195px;
+                left: 200px;
+            }
+        }
+
+        .blue-right-wheel {
+            position: fixed;
+            width: 50px;
+            height: 30px;
+            top: 280px;
+            left: 290px;
+            z-index: 5;
+            border: 5px solid #3f3f3f;
+            background: #2497b4;
+            border-radius: 25px;
+        }
+
+        .blue-right-wheel-line {
+            position: fixed;
+            width: 30px;
+            height: 5px;
+            top: 297px;
+            left: 305px;
+            background: #3f3f3f;
+        }
+
+        .blue-wheel-front {
+            position: fixed;
+            width: 170px;
+            height: 30px;
+            top: 280px;
+            left: 170px;
+            z-index: 3;
+            border: 5px solid #3f3f3f;
+            background: #54c8ef;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+        .blue-wheel-outline {
+            position: fixed;
+            width: 170px;
+            height: 30px;
+            top: 280px;
+            left: 170px;
+            z-index: 3;
+            border: 5px solid #3f3f3f;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .blue-wheel-shade {
+            position: fixed;
+            width: 150px;
+            height: 14px;
+            top: 301px;
+            left: 175px;
+            z-index: -2;
+            background: #2497b4;
+            border-bottom-left-radius: 25px;
+        }
+
+        .blue-wheel-line1 {
+            position: fixed;
+            width: 120px;
+            height: 5px;
+            top: 308px;
+            left: 175px;
+            z-index: -1;
+            background: #3f3f3f;
+            animation-name: blue-wheel-line1;
+            animation-duration: 300ms;
+            animation-delay: 300ms;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-wheel-line2 {
+            position: fixed;
+            width: 120px;
+            height: 5px;
+            top: 301px;
+            left: 175px;
+            z-index: -1;
+            background: #3f3f3f;
+            animation-name: blue-wheel-line2;
+            animation-duration: 300ms;
+            animation-delay: 200ms;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-wheel-line3 {
+            position: fixed;
+            width: 120px;
+            height: 5px;
+            top: 294px;
+            left: 175px;
+            z-index: -1;
+            background: #3f3f3f;
+            animation-name: blue-wheel-line3;
+            animation-duration: 300ms;
+            animation-delay: 100ms;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-wheel-line4 {
+            position: fixed;
+            width: 120px;
+            height: 5px;
+            top: 287px;
+            left: 175px;
+            z-index: -1;
+            background: #3f3f3f;
+            animation-name: blue-wheel-line4;
+            animation-duration: 300ms;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-body {
+            position: fixed;
+            width: 110px;
+            height: 140px;
+            top: 140px;
+            left: 200px;
+            z-index: -3;
+            border: 5px solid #3f3f3f;
+            background: #54c8ef;
+            border-top-left-radius: 70px;
+            border-top-right-radius: 70px;
+            overflow: none;
+        }
+
+        .blue-body-line1 {
+            position: fixed;
+            width: 120px;
+            height: 5px;
+            top: 255px;
+            left: 200px;
+            z-index: -1;
+            background: #3f3f3f;
+        }
+
+        .blue-body-line2 {
+            position: fixed;
+            width: 120px;
+            height: 5px;
+            top: 225px;
+            left: 200px;
+            z-index: -1;
+            background: #3f3f3f;
+        }
+
+        .blue-body-line3 {
+            position: fixed;
+            width: 120px;
+            height: 5px;
+            top: 195px;
+            left: 200px;
+            z-index: -1;
+            background: #3f3f3f;
+        }
+
+        .blue-lower-dot1 {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            top: 263px;
+            left: 223px;
+            z-index: -1;
+            background: #2497b4;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+            animation-name: blue-lower-dot1;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-lower-dot2 {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            top: 263px;
+            left: 253px;
+            z-index: -1;
+            background: #e33568;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+            animation-name: blue-lower-dot2;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-lower-dot3 {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            top: 263px;
+            left: 283px;
+            z-index: -1;
+            background: #2497b4;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+            animation-name: blue-lower-dot3;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-lower-triangle {
+            position: fixed;
+            width: 0;
+            height: 0;
+            top: 260px;
+            left: 205px;
+            z-index: 4;
+            border-top: 10px solid #2497b4;
+            border-right: 10px solid transparent;
+        }
+
+        .blue-mid-dot1 {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            top: 235px;
+            left: 223px;
+            z-index: -1;
+            background: #e33568;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+            animation-name: blue-mid-dot1;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-mid-dot2 {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            top: 235px;
+            left: 253px;
+            z-index: -1;
+            background: #2497b4;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+            animation-name: blue-mid-dot2;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-mid-dot3 {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            top: 235px;
+            left: 283px;
+            z-index: -1;
+            background: #e33568;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+            animation-name: blue-mid-dot3;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-mid-triangle {
+            position: fixed;
+            width: 0;
+            height: 0;
+            top: 230px;
+            left: 205px;
+            z-index: 4;
+            border-top: 10px solid #2497b4;
+            border-right: 10px solid transparent;
+        }
+
+        .blue-top-box {
+            position: fixed;
+            width: 18px;
+            height: 15px;
+            top: 195px;
+            left: 215px;
+            z-index: -1;
+            background: #2497b4;
+            border: 5px solid #3f3f3f;
+            animation-name: blue-top-box;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-eye {
+            position: fixed;
+            width: 14px;
+            height: 14px;
+            top: 165px;
+            left: 219px;
+            z-index: -1;
+            background: #ffffff;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+            animation-name: blue-eye;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .blue-head {
+            position: fixed;
+            width: 110px;
+            height: 50px;
+            top: 140px;
+            left: 200px;
+            z-index: -1;
+            border: 5px solid #3f3f3f;
+            background: #54c8ef;
+            border-top-left-radius: 70px;
+            border-top-right-radius: 70px;
+            overflow: hidden;
+        }
+
+        .blue-head-line {
+            position: fixed;
+            width: 110px;
+            height: 50px;
+            top: 140px;
+            left: 200px;
+            z-index: 3;
+            border: 5px solid #3f3f3f;
+            border-top-left-radius: 70px;
+            border-top-right-radius: 70px;
+            overflow: hidden;
+        }
+
+        .blue-glare1 {
+            position: relative;
+            width: 20px;
+            height: 50px;
+            transform: skew(40deg);
+            background: #7fd6f2;
+            left: 75px;
+        }
+
+        .blue-glare2 {
+            position: relative;
+            width: 10px;
+            height: 50px;
+            transform: skew(40deg);
+            background: #7fd6f2;
+            left: 60px;
+            top: -50px;
+        }
+    </style>
+
+    <body>
+        <!-- Blue Robot! -->
+        <div class="blue-bot">
+            <div class="blue-right-wheel">
+                <div class="blue-right-wheel-line"></div>
+            </div>
+            <div class="blue-wheel-front">
+                <div class="blue-wheel-outline"></div>
+                <div class="blue-wheel-shade"></div>
+                <div class="blue-wheel-line1"></div>
+                <div class="blue-wheel-line2"></div>
+                <div class="blue-wheel-line3"></div>
+                <div class="blue-wheel-line4"></div>
+            </div>
+            <div class="blue-body">
+                <div class="blue-body-line1">
+                    <div class="blue-lower-dot1"></div>
+                    <div class="blue-lower-dot2"></div>
+                    <div class="blue-lower-dot3"></div>
+                    <div class="blue-lower-triangle"></div>
+                </div>
+                <div class="blue-body-line2">
+                    <div class="blue-mid-dot1"></div>
+                    <div class="blue-mid-dot2"></div>
+                    <div class="blue-mid-dot3"></div>
+                    <div class="blue-mid-triangle"></div>
+                </div>
+                <div class="blue-body-line3">
+                    <div class="blue-top-box"></div>
+                </div>
+                <div class="blue-head">
+                    <div class="blue-head-line"></div>
+                    <div class="blue-eye"></div>
+                    <div class="blue-glare1"></div>
+                    <div class="blue-glare2"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

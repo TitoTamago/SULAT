@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        /*********** Green Bot! ********/
+
+        @keyframes green-left-side {
+            0% {
+                transform: rotateX(-20deg);
+            }
+            100% {
+                transform: rotateX(20deg);
+            }
+        }
+
+        @keyframes green-right-side {
+            0% {
+                transform: rotateX(-20deg);
+            }
+            100% {
+                transform: rotateX(20deg);
+            }
+        }
+
+        @keyframes green-eyes {
+            0% {
+                transform: rotateX(-20deg);
+            }
+            100% {
+                transform: rotateX(20deg);
+            }
+        }
+
+        .green-left-foot {
+            position: fixed;
+            width: 20px;
+            height: 15px;
+            top: 340px;
+            left: 500px;
+            z-index: -1;
+            border-right: 5px solid #3f3f3f;
+            border-bottom: 5px solid #3f3f3f;
+            background: #ffffff;
+        }
+
+        .green-right-foot {
+            position: fixed;
+            width: 20px;
+            height: 15px;
+            top: 340px;
+            left: 610px;
+            z-index: -1;
+            border-left: 5px solid #3f3f3f;
+            border-bottom: 5px solid #3f3f3f;
+            background: #ffffff;
+        }
+
+        .green-left-knee {
+            position: fixed;
+            width: 9px;
+            height: 9px;
+            top: 325px;
+            left: 514px;
+            z-index: -1;
+            background: #76c598;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-right-knee {
+            position: fixed;
+            width: 9px;
+            height: 9px;
+            top: 325px;
+            left: 602px;
+            z-index: -1;
+            background: #76c598;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-left-thigh {
+            position: fixed;
+            width: 5px;
+            height: 29px;
+            top: 305px;
+            left: 527px;
+            z-index: -2;
+            background: #3f3f3f;
+            transform: rotate(30deg);
+        }
+
+        .green-right-thigh {
+            position: fixed;
+            width: 5px;
+            height: 29px;
+            top: 305px;
+            left: 602px;
+            z-index: -2;
+            background: #3f3f3f;
+            transform: rotate(-30deg);
+        }
+
+        .green-left-hip {
+            position: fixed;
+            width: 16px;
+            height: 5px;
+            top: 295px;
+            left: 527px;
+            z-index: -1;
+            background: #539c71;
+            border-radius: 0% 0% 31px 31px;
+            border: 5px solid #3f3f3f;
+            transform: rotate(20deg);
+        }
+
+        .green-right-hip {
+            position: fixed;
+            width: 16px;
+            height: 5px;
+            top: 295px;
+            left: 581px;
+            z-index: -1;
+            background: #539c71;
+            border-radius: 0% 0% 31px 31px;
+            border: 5px solid #3f3f3f;
+            transform: rotate(-20deg);
+        }
+
+        .green-chest {
+            position: fixed;
+            width: 55px;
+            height: 80px;
+            top: 205px;
+            left: 535px;
+            z-index: -1;
+            background: #76c598;
+            border-radius: 17px;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-chest-outline {
+            position: fixed;
+            width: 55px;
+            height: 80px;
+            top: 205px;
+            left: 535px;
+            z-index: 8;
+            background: transparent;
+            border-radius: 17px;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-chest-box {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            top: 265px;
+            left: 552px;
+            z-index: -1;
+            background: #539c71;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-chest-box-dot {
+            position: fixed;
+            width: 0px;
+            height: 0px;
+            top: 277px;
+            left: 568px;
+            z-index: -1;
+            background: #539c71;
+            border: 3px solid #3f3f3f;
+            border-radius: 100%;
+        }
+
+        .green-chest-line1 {
+            position: fixed;
+            width: 18px;
+            height: 5px;
+            top: 240px;
+            left: 547px;
+            z-index: -1;
+            background: #3f3f3f;
+        }
+
+        .green-chest-line2 {
+            position: fixed;
+            width: 5px;
+            height: 18px;
+            top: 220px;
+            left: 565px;
+            z-index: -1;
+            background: #3f3f3f;
+        }
+
+        .green-chest-line3 {
+            position: fixed;
+            width: 18px;
+            height: 5px;
+            top: 240px;
+            left: 570px;
+            z-index: -1;
+            background: #3f3f3f;
+        }
+
+        .green-chest-triangle {
+            position: fixed;
+            width: 0;
+            height: 0px;
+            top: 210px;
+            left: 540px;
+            z-index: 7;
+            border-top: 18px solid #539c71;
+            border-right: 14px solid transparent;
+        }
+
+        .green-left-side {
+            position: fixed;
+            left: 0;
+            animation-name: green-left-side;
+            animation-timing-function: ease-in;
+            animation-iteration-count: infinite;
+            animation-duration: 0.5s;
+        }
+
+        .green-right-side {
+            position: fixed;
+            left: 0;
+            animation-name: green-right-side;
+            animation-timing-function: ease-in;
+            animation-iteration-count: infinite;
+            animation-duration: 0.5s;
+        }
+
+        .green-left-shoulder {
+            position: fixed;
+            width: 6px;
+            height: 16px;
+            top: 225px;
+            left: 516px;
+            z-index: -1;
+            background: #539c71;
+            border-radius: 31px 0 0 31px;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-right-shoulder {
+            position: fixed;
+            width: 6px;
+            height: 16px;
+            top: 225px;
+            left: 603px;
+            z-index: -1;
+            background: #539c71;
+            border-radius: 0 31px 31px 0;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-left-arm {
+            position: fixed;
+            width: 29px;
+            height: 5px;
+            top: 235px;
+            left: 490px;
+            z-index: -2;
+            background: #3f3f3f;
+        }
+
+        .green-right-arm {
+            position: fixed;
+            width: 29px;
+            height: 5px;
+            top: 235px;
+            left: 615px;
+            z-index: -2;
+            background: #3f3f3f;
+        }
+
+        .green-left-elbow {
+            position: fixed;
+            width: 9px;
+            height: 9px;
+            top: 227px;
+            left: 480px;
+            z-index: -1;
+            background: #76c598;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-right-elbow {
+            position: fixed;
+            width: 9px;
+            height: 9px;
+            top: 227px;
+            left: 637px;
+            z-index: -1;
+            background: #76c598;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-left-wrist {
+            position: fixed;
+            width: 29px;
+            height: 5px;
+            top: 215px;
+            left: 480px;
+            z-index: -2;
+            background: #3f3f3f;
+            transform: rotate(-70deg);
+        }
+
+        .green-right-wrist {
+            position: fixed;
+            width: 29px;
+            height: 5px;
+            top: 215px;
+            left: 627px;
+            z-index: -2;
+            background: #3f3f3f;
+            transform: rotate(70deg);
+        }
+
+        .green-left-hand {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            top: 184px;
+            left: 492px;
+            z-index: -2;
+            border: 5px solid #3f3f3f;
+            border-top: 5px solid #ffffff;
+            border-right: 5px solid #ffffff;
+            border-radius: 50px;
+            transform: rotate(-20deg);
+        }
+
+        .green-right-hand {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            top: 184px;
+            left: 621px;
+            z-index: -2;
+            border: 5px solid #3f3f3f;
+            border-top: 5px solid #ffffff;
+            border-left: 5px solid #ffffff;
+            border-radius: 50px;
+            transform: rotate(20deg);
+        }
+
+        .green-head {
+            position: fixed;
+            width: 80px;
+            height: 45px;
+            top: 147px;
+            left: 523px;
+            z-index: -3;
+            background: #76c598;
+            border-radius: 50px;
+            border: 5px solid #3f3f3f;
+            overflow: hidden;
+        }
+
+        .green-mouth {
+            position: fixed;
+            width: 80px;
+            height: 5px;
+            top: 182px;
+            left: 527px;
+            z-index: 1;
+            background: #3f3f3f;
+        }
+
+        .green-left-eye {
+            position: fixed;
+            width: 7px;
+            height: 7px;
+            left: 10px;
+            top: 8px;
+            z-index: 3;
+            background: #ffffff;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-right-eye {
+            position: fixed;
+            width: 7px;
+            height: 7px;
+            left: 30px;
+            top: 8px;
+            z-index: 3;
+            background: #ffffff;
+            border: 5px solid #3f3f3f;
+        }
+
+        .green-glare1 {
+            position: relative;
+            width: 20px;
+            height: 50px;
+            left: 60px;
+            transform: skew(40deg);
+            background: #98d4b2;
+        }
+
+        .green-glare2 {
+            position: relative;
+            width: 10px;
+            height: 50px;
+            left: 45px;
+            top: -50px;
+            transform: skew(40deg);
+            background: #98d4b2;
+        }
+
+        .green-eyes {
+            z-index: 4;
+            position: fixed;
+            animation-name: green-eyes;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-duration: 1s;
+        }
+
+        .green-ant-pole {
+            position: fixed;
+            width: 5px;
+            height: 15px;
+            top: 132px;
+            left: 565px;
+            z-index: 0;
+            background: #3f3f3f;
+        }
+
+        .green-ant {
+            position: fixed;
+            width: 9px;
+            height: 9px;
+            top: 118px;
+            left: 558px;
+            z-index: -1;
+            background: #76c598;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+        }
+
+        /************* Orange Bot! ********/
+
+        @keyframes orange-tooth1 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #f47e60;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes orange-tooth2 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #f47e60;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes orange-tooth3 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #f47e60;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes orange-tooth4 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #f47e60;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+
+        @keyframes orange-antenna {
+            0% {
+                transform: scaleX(1);
+            }
+            50% {
+                transform: scaleX(1.1);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+        @keyframes orange-left-foot-line1 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #d2624c;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes orange-left-foot-line2 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #f47e60;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes orange-right-foot-line1 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #d2624c;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes orange-right-foot-line2 {
+            0% {
+                background: #3f3f3f;
+            }
+            50% {
+                background: #f47e60;
+            }
+            100% {
+                background: #3f3f3f;
+            }
+        }
+        @keyframes orange-left-side {
+            0% {
+                transform: scale(0.9, 0.9);
+            }
+            50% {
+                transform: scale(1.1, 1.1);
+            }
+            100% {
+                transform: scale(0.9, 0.9);
+            }
+        }
+        @keyframes orange-right-side {
+            0% {
+                transform: scale(0.9, 0.9);
+            }
+            50% {
+                transform: scale(1.1, 1.1);
+            }
+            100% {
+                transform: scale(0.9, 0.9);
+            }
+        }
+
+        .orange-left-foot {
+            position: fixed;
+            width: 60px;
+            height: 25px;
+            top: 297px;
+            left: 825px;
+            z-index: -3;
+            background: #d2624c;
+            border-radius: 50px;
+            border: 5px solid #3f3f3f;
+        }
+
+        .orange-left-foot-glare {
+            position: fixed;
+            width: 60px;
+            height: 14px;
+            top: 302px;
+            left: 830px;
+            z-index: -1;
+            background: #f47e60;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .orange-left-foot-line1 {
+            position: fixed;
+            width: 60px;
+            height: 5px;
+            top: 318px;
+            left: 830px;
+            z-index: -1;
+            background: #3f3f3f;
+            border-bottom-left-radius: 55px;
+            border-bottom-right-radius: 55px;
+            animation-name: orange-left-foot-line1;
+            animation-duration: 400ms;
+            animation-delay: 200ms;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .orange-left-foot-line2 {
+            position: fixed;
+            width: 60px;
+            height: 5px;
+            top: 307px;
+            left: 830px;
+            z-index: -1;
+            background: #3f3f3f;
+            border-top-left-radius: 55px;
+            border-top-right-radius: 55px;
+            animation-name: orange-left-foot-line1;
+            animation-duration: 400ms;
+            animation-delay: 0ms;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .orange-right-foot {
+            position: fixed;
+            width: 60px;
+            height: 25px;
+            top: 297px;
+            left: 897px;
+            z-index: -3;
+            background: #d2624c;
+            border-radius: 50px;
+            border: 5px solid #3f3f3f;
+        }
+
+        .orange-right-foot-glare {
+            position: fixed;
+            width: 60px;
+            height: 14px;
+            top: 302px;
+            left: 902px;
+            z-index: -1;
+            background: #f47e60;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .orange-right-foot-line1 {
+            position: fixed;
+            width: 60px;
+            height: 5px;
+            top: 318px;
+            left: 902px;
+            z-index: -1;
+            background: #3f3f3f;
+            border-bottom-left-radius: 55px;
+            border-bottom-right-radius: 55px;
+            animation-name: orange-right-foot-line1;
+            animation-duration: 400ms;
+            animation-delay: 300ms;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .orange-right-foot-line2 {
+            position: fixed;
+            width: 60px;
+            height: 5px;
+            top: 307px;
+            left: 902px;
+            z-index: -1;
+            background: #3f3f3f;
+            border-top-left-radius: 55px;
+            border-top-right-radius: 55px;
+            animation-name: orange-right-foot-line2;
+            animation-duration: 400ms;
+            animation-delay: 500ms;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .orange-chest {
+            position: fixed;
+            top: -24px;
+            left: 715px;
+            z-index: 5;
+        }
+
+        .orange-chest-circle {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            top: 230px;
+            left: 874px;
+            z-index: 1;
+            background: #d2624c;
+            border-radius: 50px;
+            border: 5px solid #3f3f3f;
+        }
+
+        .orange-chest-dot1 {
+            position: fixed;
+            width: 0px;
+            height: 0px;
+            top: 197px;
+            left: 878px;
+            z-index: 1;
+            background: #539c71;
+            border: 3px solid #3f3f3f;
+            border-radius: 100%;
+        }
+
+        .orange-chest-dot2 {
+            position: fixed;
+            width: 0px;
+            height: 0px;
+            top: 197px;
+            left: 908px;
+            z-index: 1;
+            background: #539c71;
+            border: 3px solid #3f3f3f;
+            border-radius: 100%;
+        }
+
+        .orange-chest-dot3 {
+            position: fixed;
+            width: 0px;
+            height: 0px;
+            top: 257px;
+            left: 902px;
+            z-index: 1;
+            background: #539c71;
+            border: 3px solid #3f3f3f;
+            border-radius: 100%;
+        }
+
+        .orange-left-side {
+            animation-name: orange-left-side;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        .orange-right-side {
+            animation-name: orange-right-side;
+            animation-duration: 0.5s;
+            animation-delay: 0.2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .orange-left-arm {
+            position: fixed;
+            top: 177px;
+            left: 412px;
+            z-index: -8;
+        }
+
+        .orange-left-hand {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            top: 237px;
+            left: 773px;
+            z-index: -2;
+            border: 5px solid #3f3f3f;
+            border-bottom: 5px solid #ffffff;
+            border-left: 5px solid #ffffff;
+            border-radius: 50px;
+            transform: rotate(-20deg);
+        }
+
+        .orange-right-arm {
+            position: fixed;
+            top: 17px;
+            left: 465px;
+            z-index: -8;
+        }
+
+        .orange-right-hand {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            top: 118px;
+            left: 972px;
+            z-index: -2;
+            border: 5px solid #3f3f3f;
+            border-top: 5px solid #ffffff;
+            border-right: 5px solid #ffffff;
+            border-radius: 50px;
+            transform: rotate(-60deg);
+        }
+
+        .orange-head {
+            position: fixed;
+            width: 100px;
+            height: 45px;
+            top: 114px;
+            left: 843px;
+            z-index: -3;
+            background: #f47e60;
+            border: 5px solid #3f3f3f;
+            overflow: hidden;
+        }
+
+        .orange-mouth {
+            position: fixed;
+            width: 30px;
+            height: 0px;
+            top: 150px;
+            left: 904px;
+            z-index: -3;
+            border: 5px solid #3f3f3f;
+        }
+
+        .orange-tooth1 {
+            position: fixed;
+            width: 5px;
+            height: 2px;
+            top: 154px;
+            left: 934px;
+            z-index: 1;
+            background: #f47e60;
+            animation-name: orange-tooth1;
+            animation-duration: 1s;
+            animation-delay: 300ms;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .orange-tooth2 {
+            position: fixed;
+            width: 5px;
+            height: 2px;
+            top: 154px;
+            left: 926px;
+            z-index: 1;
+            background: #f47e60;
+            animation-name: orange-tooth2;
+            animation-duration: 1s;
+            animation-delay: 600ms;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .orange-tooth3 {
+            position: fixed;
+            width: 5px;
+            height: 2px;
+            top: 154px;
+            left: 918px;
+            z-index: 1;
+            background: #f47e60;
+            animation-name: orange-tooth3;
+            animation-duration: 1s;
+            animation-delay: 100ms;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .orange-tooth4 {
+            position: fixed;
+            width: 5px;
+            height: 2px;
+            top: 154px;
+            left: 910px;
+            z-index: 1;
+            background: #f47e60;
+            animation-name: orange-tooth4;
+            animation-duration: 1s;
+            animation-delay: 800ms;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-play-state: running;
+        }
+
+        .orange-eye {
+            position: fixed;
+            width: 80px;
+            height: 5px;
+            top: 129px;
+            left: 853px;
+            z-index: -3;
+            background: #ffffff;
+            border: 5px solid #3f3f3f;
+            border-radius: 50px;
+        }
+
+        .orange-glare1 {
+            position: relative;
+            width: 20px;
+            height: 50px;
+            left: 30px;
+            z-index: -4;
+            transform: skew(40deg);
+            background: #f59f88;
+        }
+
+        .orange-glare2 {
+            position: relative;
+            width: 5px;
+            height: 60px;
+            left: 24px;
+            top: -50px;
+            z-index: -4;
+            transform: skew(40deg);
+            background: #f59f88;
+        }
+
+        .orange-antenna {
+            animation-name: orange-antenna;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .orange-ant-base {
+            position: fixed;
+            width: 30px;
+            height: 0px;
+            top: 100px;
+            left: 880px;
+            z-index: -3;
+            border: 3px solid #3f3f3f;
+        }
+
+        .orange-ant-pole {
+            position: fixed;
+            width: 5px;
+            height: 29px;
+            top: 75px;
+            left: 900px;
+            z-index: -2;
+            background: #3f3f3f;
+            transform: rotate(30deg);
+        }
+        .orange-ant-top {
+            position: fixed;
+            width: 9px;
+            height: 9px;
+            top: 66px;
+            left: 900px;
+            z-index: -1;
+            background: #f57f63;
+            border-radius: 100%;
+            border: 5px solid #3f3f3f;
+        }
+    </style>
+
+    <body>
+        <!-- Green Robot! -->
+        <div class="green-bot">
+            <div class="green-left-foot"></div>
+            <div class="green-right-foot"></div>
+            <div class="green-left-knee"></div>
+            <div class="green-right-knee"></div>
+            <div class="green-left-thigh"></div>
+            <div class="green-right-thigh"></div>
+            <div class="green-left-hip"></div>
+            <div class="green-right-hip"></div>
+            <div class="green-chest">
+                <div class="green-chest-outline"></div>
+                <div class="green-chest-box"></div>
+                <div class="green-chest-box-dot"></div>
+                <div class="green-chest-line1"></div>
+                <div class="green-chest-line2"></div>
+                <div class="green-chest-line3"></div>
+                <div class="green-chest-triangle"></div>
+            </div>
+            <div class="green-left-side">
+                <div class="green-left-shoulder"></div>
+                <div class="green-left-arm"></div>
+                <div class="green-left-elbow"></div>
+                <div class="green-left-wrist"></div>
+                <div class="green-left-hand"></div>
+            </div>
+            <div class="green-right-side">
+                <div class="green-right-shoulder"></div>
+                <div class="green-right-arm"></div>
+                <div class="green-right-elbow"></div>
+                <div class="green-right-wrist"></div>
+                <div class="green-right-hand"></div>
+            </div>
+            <div class="green-head">
+                <div class="green-mouth"></div>
+                <div class="green-eyes">
+                    <div class="green-left-eye"></div>
+                    <div class="green-right-eye"></div>
+                </div>
+                <div class="green-glare1"></div>
+                <div class="green-glare2"></div>
+            </div>
+            <div class="green-antenna">
+                <div class="green-ant-pole"></div>
+                <div class="green-ant"></div>
+            </div>
+        </div>
+
+        <!-- Orange Robot! -->
+        <div class="orange-bot">
+            <div class="orange-left-foot">
+                <div class="orange-left-foot-glare"></div>
+                <div class="orange-left-foot-line1"></div>
+                <div class="orange-left-foot-line2"></div>
+            </div>
+            <div class="orange-right-foot">
+                <div class="orange-right-foot-glare"></div>
+                <div class="orange-right-foot-line1"></div>
+                <div class="orange-right-foot-line2"></div>
+            </div>
+            <div class="orange-chest">
+                <svg
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    width="612px"
+                    height="792px"
+                    viewBox="0 0 612 792"
+                    enable-background="new 0 0 612 792"
+                    xml:space="preserve"
+                >
+                    <g id="Layer_1"></g>
+                    <g id="Layer_2">
+                        <g>
+                            <path
+                                fill="#F47E60"
+                                d="M237.091,303.151c1.425,5.807-2.127,10.515-7.934,10.515h-96.974c-5.807,0-9.185-4.708-7.543-10.515
+			l26.086-92.301c1.641-5.807,5.292-10.515,8.154-10.515h47.795c2.862,0,6.338,4.708,7.763,10.515L237.091,303.151z"
+                            />
+                            <path
+                                fill="none"
+                                stroke="#3F3F3F"
+                                stroke-width="5"
+                                stroke-miterlimit="10"
+                                d="M237.091,303.151
+			c1.425,5.807-2.127,10.515-7.934,10.515h-96.974c-5.807,0-9.185-4.708-7.543-10.515l26.086-92.301
+			c1.641-5.807,5.292-10.515,8.154-10.515h47.795c2.862,0,6.338,4.708,7.763,10.515L237.091,303.151z"
+                            />
+                        </g>
+                    </g>
+                </svg>
+                <div class="orange-chest-circle"></div>
+                <div class="orange-chest-dot1"></div>
+                <div class="orange-chest-dot2"></div>
+                <div class="orange-chest-dot3"></div>
+            </div>
+            <div class="orange-left-side">
+                <div class="orange-left-arm">
+                    <svg
+                        version="1.1"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        width="612px"
+                        height="792px"
+                        viewBox="0 0 612 792"
+                        enable-background="new 0 0 612 792"
+                        xml:space="preserve"
+                    >
+                        <path
+                            fill="none"
+                            stroke="#3F3F3F"
+                            stroke-width="5"
+                            stroke-miterlimit="10"
+                            d="M490.325,43.642
+	C445.492,19.845,393.923,29.398,375.026,65"
+                        />
+                    </svg>
+                </div>
+                <div class="orange-left-hand"></div>
+            </div>
+            <div class="orange-right-side">
+                <div class="orange-right-arm">
+                    <svg
+                        version="1.1"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        width="612px"
+                        height="792px"
+                        viewBox="0 0 612 792"
+                        enable-background="new 0 0 612 792"
+                        xml:space="preserve"
+                    >
+                        <path
+                            fill="none"
+                            stroke="#3F3F3F"
+                            stroke-width="5"
+                            stroke-miterlimit="10"
+                            d="M438.626,198.631
+	c48.201-5.129,83.909-40.253,79.836-78.53"
+                        />
+                    </svg>
+                </div>
+                <div class="orange-right-hand"></div>
+            </div>
+            <div class="orange-head">
+                <div class="orange-mouth">
+                    <div class="orange-tooth1"></div>
+                    <div class="orange-tooth2"></div>
+                    <div class="orange-tooth3"></div>
+                    <div class="orange-tooth4"></div>
+                </div>
+                <div class="orange-eye"></div>
+                <div class="orange-glare1"></div>
+                <div class="orange-glare2"></div>
+            </div>
+            <div class="orange-antenna">
+                <div class="orange-ant-base"></div>
+                <div class="orange-ant-pole"></div>
+                <div class="orange-ant-top"></div>
+            </div>
+        </div>
+    </body>
+</html>
