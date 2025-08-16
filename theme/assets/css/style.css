@@ -1,0 +1,44 @@
+
+.hidden-left {
+transition: 500ms;
+opacity: 0;
+transform: translateX(100px);
+}
+
+.hidden-right {
+transition: 500ms;
+opacity: 0;
+transform: translateX(-100px);
+}
+
+.hidden-bottom {
+transition: 500ms;
+opacity: 0;
+transform: translateY(100px);
+}
+
+.hidden-top {
+transition: 500ms;
+opacity: 0;
+transform: translateY(-100px);
+}
+
+.hidden-left.show {
+opacity: 1;
+transform: translateX(0);
+}
+
+.hidden-right.show {
+opacity: 1;
+transform: translateX(0);
+}
+
+.hidden-bottom.show {
+opacity: 1;
+transform: translateY(0);
+}
+
+.hidden-top.show {
+opacity: 1;
+transform: translateY(0);
+}

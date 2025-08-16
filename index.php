@@ -4,14 +4,14 @@
 <section class="hero-section">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-5">
+            <div class="col-md-5 hidden-left">
                 <div class="mt-md-4">
                     <div>
                         <span class="badge bg-danger rounded-pill">New</span>
                         <span class="text-white-50 ms-1">Powered by OCR + AI. SULAT reads your handwritten text and brings it to life with a smart chatbot.</span>
                     </div>
                     <h2 class="text-white fw-normal mb-4 mt-3 hero-title">
-                        Turn Handwriting into Smart Conversations.
+                        Turn Handwriting into <span id="typing-text"></span>.
                     </h2>
 
                     <p class="mb-4 font-16 text-white-50">SULAT is a smart handwritten text system that converts handwriting into digital text using OCR, and lets you interact with it through an
@@ -20,7 +20,7 @@
                     <a href="#" target="_blank" class="btn btn-success">Preview <i class="mdi mdi-arrow-right ms-1"></i></a>
                 </div>
             </div>
-            <div class="col-md-5 offset-md-2">
+            <div class="col-md-7">
                 <div class="text-md-end mt-3 mt-md-0">
                     <?php include 'theme/assets/customize-animation/graffiti-animation.php'; ?>
                 </div>
@@ -33,7 +33,7 @@
 <!-- START SERVICES -->
 <section class="py-5">
     <div class="container">
-        <div class="row py-4">
+        <div class="row py-4 hidden-top">
             <div class="col-lg-12">
                 <div class="text-center">
                     <h1 class="mt-0"><i class="mdi mdi-infinity"></i></h1>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 hidden-bottom">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 hidden-bottom">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 hidden-bottom">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -85,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 hidden-bottom">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -98,7 +98,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 hidden-bottom">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -111,7 +111,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 hidden-bottom">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">

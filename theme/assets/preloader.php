@@ -19,7 +19,7 @@ h1 {
     width: 100%;
     height: 100%;
     /* soft light gray-blue */
-    z-index: 10;
+    z-index: 998;
     overflow: hidden;
 }
 
@@ -41,7 +41,7 @@ h1 {
     border-top-color: #2a7ec2;
     /* brand blue */
     animation: spin 1.7s linear infinite;
-    z-index: 11;
+    z-index: 999;
 }
 
 #loader:before {
@@ -140,7 +140,7 @@ h1 {
     max-width: 80px;
     /* adjust size */
     max-height: 80px;
-    z-index: 12;
+    z-index: 1000;
     /* above spinning borders */
 }
 </style>

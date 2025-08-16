@@ -65,8 +65,10 @@
 <!-- END FOOTER -->
 
 <!-- bundle -->
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 <script src="theme/assets/js/vendor.min.js"></script>
 <script src="theme/assets/js/app.min.js"></script>
+<script src="theme/assets/js/script.js"></script>
 
 </body>
 
