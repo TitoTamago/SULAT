@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="theme/assets/images/favicon.ico" />
 
     <!-- App css -->
+    <link href="theme/assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="theme/assets/css/icons.modified.css" rel="stylesheet" type="text/css" />
     <link href="theme/assets/css/app.modified.css" rel="stylesheet" type="text/css" id="app-style" />
 </head>

@@ -1,5 +1,5 @@
 
-.hidden-left {
+/* .hidden-left {
 transition: 500ms;
 opacity: 0;
 transform: translateX(100px);
@@ -41,4 +41,56 @@ transform: translateY(0);
 .hidden-top.show {
 opacity: 1;
 transform: translateY(0);
+} */
+
+.pulse-animation{
+    animation: pulse 2s infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.85;
+    }
+}
+
+.pencil-svg-icon-animation{
+    animation: write 3s linear infinite;
+}
+
+/* Writing animation - moves pencil across */
+@keyframes write {
+    0% {
+        transform: translate(0%, 0%) rotate(-45deg);
+    }
+    25% {
+        transform: translate(1%, 5%)rotate(-40deg);
+    }
+    50% {
+        transform: translate(-1%, -5%)rotate(-52deg);
+    }
+    75% {
+        transform: translate(1%, 5%) rotate(-43deg);
+    }
+    100% {
+        transform: translate(0%, 0%) rotate(-45deg);
+    }
+}
+
+.popIn-animation{
+  animation: popIn 0.5s ease-out forwards;
+}
+
+.features:hover{
+    scale: 1.1;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }

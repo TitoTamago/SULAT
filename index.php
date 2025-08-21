@@ -30,13 +30,59 @@
 </section>
 <!-- END HERO -->
 
+<!-- START WHAT IS SULAT -->
+<section class="py-5">
+    <div class="container">
+        <div class="row py-4 hidden-top">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h1 class="mt-0 pencil-svg-icon-animation"><i class="mdi mdi-pencil "></i></h1>
+                    <h3>What is <span class="text-primary">SULAT?</span></h3>
+                    <p class="text-muted mt-2">
+                        <strong>SULAT</strong> is a smart handwriting-to-digital platform that helps you turn your handwritten notes
+                        into searchable, editable text and meaningful conversations.<br>
+                        Built with OCR and AI assistance, SULAT makes learning, studying, and idea exploration
+                        easier and more interactive.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-7">
+                <?php include 'theme/assets/customize-animation/text-progress.php'; ?>
+            </div>
+            <div class="col-lg-5">
+                <div class="row">
+                    <!-- Step 1 -->
+                    <div class=" col-md-8 hidden-bottom">
+                        <div class="text-center p-2 p-sm-3">
+                            <div class="avatar-sm m-auto">
+                                <span class="avatar-title bg-primary-lighten rounded-circle">
+                                    <i class="uil uil-camera text-primary font-24"></i>
+                                </span>
+                            </div>
+                            <h4 class="mt-3">1. Capture Your Notes</h4>
+                            <p class="text-muted mt-2 mb-0">
+                                Upload or take a photo of your handwritten content directly in the platform.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END WHAT IS SULAT -->
+
+
 <!-- START SERVICES -->
 <section class="py-5">
     <div class="container">
         <div class="row py-4 hidden-top">
             <div class="col-lg-12">
                 <div class="text-center">
-                    <h1 class="mt-0"><i class="mdi mdi-infinity"></i></h1>
+                    <h1 class="mt-0 pulse-animation"><i class="mdi mdi-infinity"></i></h1>
                     <h3>The System is <span class="text-primary">fast, intuitive, and perfect</span> for turning notes into <span class="text-primary">meaningful conversations.</span></h3>
                     <p class="text-muted mt-2">Built for usability, offers a clean interface, fast performance, and smart automation. It's designed for
                         <br>describing your app, agency or business.
@@ -46,7 +92,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6 hidden-bottom">
+            <div class="col-lg-4 col-md-6 hidden-bottom features">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -59,7 +105,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 hidden-bottom">
+            <div class="col-lg-4 col-md-6 hidden-bottom features">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -72,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 hidden-bottom">
+            <div class="col-lg-4 col-md-6 hidden-bottom features">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -85,7 +131,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 hidden-bottom">
+            <div class="col-lg-4 col-md-6 hidden-bottom features">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -98,7 +144,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 hidden-bottom">
+            <div class="col-lg-4 col-md-6 hidden-bottom features">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -111,7 +157,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 hidden-bottom">
+            <div class="col-lg-4 col-md-6 hidden-bottom features">
                 <div class="text-center p-2 p-sm-3">
                     <div class="avatar-sm m-auto">
                         <span class="avatar-title bg-primary-lighten rounded-circle">
@@ -254,75 +300,5 @@
     </div> <!-- end container-->
 </section>
 <!-- END FAQ -->
-
-
-<!-- START CONTACT -->
-<section class="py-5 bg-light-lighten border-top border-bottom border-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="text-center">
-                    <h3>Get In <span class="text-primary">Touch</span></h3>
-                    <p class="text-muted mt-2">Please fill out the following form and we will get back to you shortly. For more
-                        <br>information please contact us.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row align-items-center mt-3">
-            <div class="col-md-4">
-                <p class="text-muted"><span class="fw-bold">Customer Support:</span><br> <span class="d-block mt-1">+1 234 56 7894</span></p>
-                <p class="text-muted mt-4"><span class="fw-bold">Email Address:</span><br> <span class="d-block mt-1">info@gmail.com</span></p>
-                <p class="text-muted mt-4"><span class="fw-bold">Office Address:</span><br> <span class="d-block mt-1">4461 Cedar Street Moro, AR 72368</span></p>
-                <p class="text-muted mt-4"><span class="fw-bold">Office Time:</span><br> <span class="d-block mt-1">9:00AM To 6:00PM</span></p>
-            </div>
-
-            <div class="col-md-8">
-                <form>
-                    <div class="row mt-4">
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label for="fullname" class="form-label">Your Name</label>
-                                <input class="form-control form-control-light" type="text" id="fullname" placeholder="Name...">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-2">
-                                <label for="emailaddress" class="form-label">Your Email</label>
-                                <input class="form-control form-control-light" type="email" required="" id="emailaddress" placeholder="Enter you email...">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-1">
-                        <div class="col-lg-12">
-                            <div class="mb-2">
-                                <label for="subject" class="form-label">Your Subject</label>
-                                <input class="form-control form-control-light" type="text" id="subject" placeholder="Enter subject...">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-1">
-                        <div class="col-lg-12">
-                            <div class="mb-2">
-                                <label for="comments" class="form-label">Message</label>
-                                <textarea id="comments" rows="4" class="form-control form-control-light" placeholder="Type your message here..."></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-2">
-                        <div class="col-12 text-end">
-                            <button class="btn btn-primary">Send a Message <i class="mdi mdi-telegram ms-1"></i> </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- END CONTACT -->
 
 <?php include "theme/homepage-footer.php";?>
