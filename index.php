@@ -37,7 +37,7 @@
             <div class="col-lg-12">
                 <div class="text-center">
                     <h1 class="mt-0 pencil-svg-icon-animation"><i class="mdi mdi-pencil "></i></h1>
-                    <h3>What is <span class="text-primary">SULAT?</span></h3>
+                    <h3>About <span class="text-primary">SULAT</span></h3>
                     <p class="text-muted mt-2">
                         <strong>SULAT</strong> is a smart handwriting-to-digital platform that helps you turn your handwritten notes
                         into searchable, editable text and meaningful conversations.<br>
@@ -53,21 +53,13 @@
                 <?php include 'theme/assets/customize-animation/text-progress.php'; ?>
             </div>
             <div class="col-lg-5">
-                <div class="row">
-                    <!-- Step 1 -->
-                    <div class=" col-md-8 hidden-bottom">
-                        <div class="text-center p-2 p-sm-3">
-                            <div class="avatar-sm m-auto">
-                                <span class="avatar-title bg-primary-lighten rounded-circle">
-                                    <i class="uil uil-camera text-primary font-24"></i>
-                                </span>
-                            </div>
-                            <h4 class="mt-3">1. Capture Your Notes</h4>
-                            <p class="text-muted mt-2 mb-0">
-                                Upload or take a photo of your handwritten content directly in the platform.
-                            </p>
-                        </div>
-                    </div>
+                <div class="text-justify">
+                    <h3>Significance of <span class="text-success">SULAT?</span></h3>
+                    <p class="text-muted mt-2" style="text-align: justify;">
+                        The <strong>Sulat System</strong> is significant because it enhances communication and productivity by providing a simple, efficient, and automated platform for creating,
+                        managing, and presenting written content. It benefits students, professionals, and organizations by streamlining tasks, reducing manual effort, and promoting a smoother digital
+                        workflow.
+                    </p>
                 </div>
             </div>
         </div>
@@ -84,8 +76,7 @@
                 <div class="text-center">
                     <h1 class="mt-0 pulse-animation"><i class="mdi mdi-infinity"></i></h1>
                     <h3>The System is <span class="text-primary">fast, intuitive, and perfect</span> for turning notes into <span class="text-primary">meaningful conversations.</span></h3>
-                    <p class="text-muted mt-2">Built for usability, offers a clean interface, fast performance, and smart automation. It's designed for
-                        <br>describing your app, agency or business.
+                    <p class="text-muted mt-2">Crafted for simplicity, Sulat Project delivers a smooth experience, lightning-fast performance, and intelligent automation-built.
                     </p>
                 </div>
             </div>

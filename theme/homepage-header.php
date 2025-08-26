@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Landing Page | Hyper - Responsive Bootstrap 5 Admin Dashboard</title>
+    <title>SULAT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -36,7 +36,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark" style="
     position: fixed;
     width: 100%;
-    z-index: 2;
+    z-index: 900;
     background-color: #2a7ec2eb;">
         <div class="container">
             <!-- logo -->
@@ -60,13 +60,7 @@
                         <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item mx-lg-1">
                         <a class="nav-link" href="#">FAQs</a>
-                    </li>
-                    <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Clients</a>
                     </li>
                     <li class="nav-item mx-lg-1">
                         <a class="nav-link" href="#">Contact</a>
