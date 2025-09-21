@@ -1,6 +1,7 @@
 # Ignore Credentials
 includes/google-cloud-vision-api/sulat-ocr-key.json
-modules/chatbot-handler.php
+includes/google-search-api/search-api.json
+modules/openAI-key.json
 
 # Ignore vendor folder inside includes/
 includes/vendor/

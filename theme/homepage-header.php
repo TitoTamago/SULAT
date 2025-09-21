@@ -57,22 +57,25 @@
                         <a class="nav-link active" href="#">Home</a>
                     </li>
                     <li class="nav-item mx-lg-1">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
                         <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">FAQs</a>
+                        <a class="nav-link" href="#">Purpose</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">FAQs</a>
                     </li>
                 </ul>
 
                 <!-- right menu -->
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item me-0">
-                        <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/" target="_blank" class="nav-link d-lg-none">Try it now</a>
-                        <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/" target="_blank" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
-                            <i class="mdi mdi-basket me-2"></i> Try it now
+                        <a href="login.php" class="nav-link d-lg-none">Try it now</a>
+                        <a href="login.php" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
+                            <i class="mdi mdi-application-edit me-2"></i> Try it now
                         </a>
                     </li>
                 </ul>

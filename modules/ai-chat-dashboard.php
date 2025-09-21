@@ -1,5 +1,9 @@
 <?php include('../includes/init.php');
 include('../theme/header.php');
+include "../includes/google-search-api/search-handler.php";
+$searchLimitReached = checkSearchLimit();
+
+
 ?>
 
 <style>
@@ -14,7 +18,6 @@ include('../theme/header.php');
 }
 
 button {
-    padding: 10px;
     cursor: pointer;
 }
 
@@ -35,7 +38,7 @@ canvas {
             <div class="row mt-2">
 
                 <!-- CHAT AREA -->
-                <div class="col-xl-">
+                <div class="col-xl-6">
                     <div class="card">
                         <div class="card-body px-0 pb-0">
                             <div id="conversation-html">
@@ -46,6 +49,15 @@ canvas {
                                     <div class="mt-2 bg-light p-3 rounded">
                                         <form class="needs-validation" novalidate="" name="chat-form" id="chat-form">
                                             <div class="row">
+                                                <div class="col-mb-12">
+                                                    <?php if ($searchLimitReached): ?>
+                                                    <p class="text-warning">
+                                                        ⚠️ Daily Google Search API limit (100) has been reached.
+                                                        The assistant will still work, but without live search results.
+                                                    </p>
+                                                    <?php endif; ?>
+                                                </div>
+
                                                 <div class="col mb-2 mb-sm-0">
                                                     <input type="text" class="form-control border-0" placeholder="Enter your text" required="" id="chat-input">
                                                     <div class="invalid-feedback">
@@ -136,8 +148,8 @@ function saveCanvasImage() {
 
     });
 }
-</script>
-<script>
+
+
 function scrollToBottom() {
     const $chatBoxWrapper = $('#chat-box .simplebar-content-wrapper');
     $chatBoxWrapper.scrollTop($chatBoxWrapper[0].scrollHeight);
