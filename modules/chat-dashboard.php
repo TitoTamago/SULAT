@@ -5,7 +5,7 @@ $user_id = $_SESSION['user_id'] ?? 0; // replace with actual logic
 
 <!-- Start Content-->
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-2">
         <!-- chat area -->
         <div class="col-xxl-12 col-xl-12 order-xl-12">
             <div class="card">

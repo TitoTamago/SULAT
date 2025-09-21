@@ -186,13 +186,14 @@ if (!isset($_SESSION['user_id'])){
             <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"">
                 <div class=" modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <form id="login-form" method="POST" action="login.php">
+                    <form id="login-form" method="POST" action="auth.php">
                         <div class="modal-header">
                             <h5 class="modal-title" id="loginModalLabel">Login</h5>
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
+                                <input type="hidden" value="login" name="action">
+                                <label for="username" class="form-label">Username/Email</label>
                                 <input type="text" class="form-control" name="username" id="username" required>
                             </div>
                             <div class="mb-3">

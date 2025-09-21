@@ -42,7 +42,7 @@ canvas {
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-2">
         <div class="card card-h-100">
             <div class="d-flex card-header f-d-column justify-content-between" style="flex-direction: column;">
                 <div class="row">

@@ -38,3 +38,4 @@ var typed = new Typed("#typing-text", {
 // hiddenBottom.forEach((bottom) => {
 // observer.observe(bottom);
 // });
+
