@@ -176,17 +176,6 @@
 <script src="../includes/js.feature.functions/screenshot.feature.js"></script>
 
 <script>
-$(document).ready(function() {
-    <?php if ($showLoginModal): ?>
-    $('#loginModal').modal('show');
-    <?php endif; ?>
-
-    $('#loginModal').modal({
-        backdrop: 'static',
-        keyboard: false
-    });
-});
-
 <?php if (isset($_SESSION['swal_fire'])): ?>
 document.addEventListener('DOMContentLoaded', function() {
     Swal.fire({

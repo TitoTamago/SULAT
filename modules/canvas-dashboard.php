@@ -53,13 +53,40 @@ canvas {
 
                         </div>
                         <div id="toolbar">
-                            <button class="btn btn-primary btn-sm" onclick="setMode('draw')"><i class="mdi mdi-draw"></i></button>
-                            <button class="btn btn-danger btn-sm" onclick="setMode('erase')"><i class="mdi mdi-eraser"></i></button>
-                            <button class="btn btn-warning btn-sm" onclick="setMode('default')"><i class="mdi mdi-cursor-default"></i></button>
-                            <button class="btn btn-secondary btn-sm" onclick="clearCanvas()"><i class="mdi mdi-delete"></i></button>
+                            <!-- Toolbar Buttons -->
+                            <button class="btn btn-primary btn-sm" onclick="setMode('draw')" data-bs-toggle="popover" data-bs-trigger="hover" title="Drawing Tool"
+                                data-bs-content="Draw freely on the canvas using the pen tool.">
+                                <i class="mdi mdi-draw"></i>
+                            </button>
+
+                            <button class="btn btn-danger btn-sm" onclick="setMode('erase')" data-bs-toggle="popover" data-bs-trigger="hover" title="Eraser Tool"
+                                data-bs-content="Erase parts of your drawing with a thick brush.">
+                                <i class="mdi mdi-eraser"></i>
+                            </button>
+
+                            <button class="btn btn-warning btn-sm" onclick="setMode('default')" data-bs-toggle="popover" data-bs-trigger="hover" title="Pointer Mode"
+                                data-bs-content="Return to normal cursor mode without drawing or erasing.">
+                                <i class="mdi mdi-cursor-default"></i>
+                            </button>
+
+                            <button class="btn btn-secondary btn-sm" onclick="clearCanvas()" data-bs-toggle="popover" data-bs-trigger="hover" title="Clear Canvas"
+                                data-bs-content="Clear everything on the canvas after confirmation.">
+                                <i class="mdi mdi-delete"></i>
+                            </button>
+
+                            <button class="btn btn-info btn-sm" onclick="undo()" data-bs-toggle="popover" data-bs-trigger="hover" title="Undo Action"
+                                data-bs-content="Revert the most recent stroke or action.">
+                                <i class="mdi mdi-undo"></i>
+                            </button>
+
+                            <button class="btn btn-info btn-sm" onclick="redo()" data-bs-toggle="popover" data-bs-trigger="hover" title="Redo Action"
+                                data-bs-content="Redo the last undone stroke or action.">
+                                <i class="mdi mdi-redo"></i>
+                            </button>
+
                         </div>
                         <div class="col-lg-12 mt-2">
-                            <button type="button" id="saveImageBtn" class="btn btn-sm btn-success" onclick="saveCanvasImage()">Save Image</button>
+                            <button type="button" id="saveImageBtn" class="btn btn-sm btn-success" onclick="saveCanvasImage()">Read the Canvas</button>
                         </div>
                     </div>
                 </div> <!-- end row-->
@@ -92,16 +119,30 @@ function saveCanvasImage() {
         dataType: 'json',
         success: function(data) {
             if (data.success) {
-                alert('Image saved successfully: ' + data.file);
+                Swal.fire({
+                    title: "Image Saved!",
+                    text: "Your image has been saved successfully.\nText Returned: " + data.text,
+                    icon: "success",
+                    confirmButtonColor: "#727cf5",
+                });
                 console.log('Image saved successfully: ' + data.file);
-                // Optional: Trigger OCR or update UI here
             } else {
-                alert('Failed to save image: ' + data.error);
+                Swal.fire({
+                    title: "Save Failed",
+                    text: "Failed to save image: " + data.error,
+                    icon: "error",
+                    confirmButtonColor: "#d33",
+                });
                 console.log('Failed to save image: ' + data.error);
             }
         },
         error: function(xhr, status, error) {
-            alert('Error sending image to server: ' + error);
+            Swal.fire({
+                title: "Connection Error",
+                text: "Error sending image to server:\n" + error,
+                icon: "error",
+                confirmButtonColor: "#d33",
+            });
             console.log('Error sending image to server: ' + error);
         }
     });

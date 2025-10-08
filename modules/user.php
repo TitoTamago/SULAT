@@ -70,7 +70,7 @@ if (isset($_POST['EDIT'])) {
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box">
-                        <h4 class="page-title">LIST OF USER</h4>
+                        <h4 class="page-title">List of System User</h4>
                     </div>
                 </div>
             </div>
@@ -103,12 +103,9 @@ if (isset($_POST['EDIT'])) {
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <?php
                                         $stmt = $pdo->query("SELECT * FROM tbl_user");
-
-                                        while ($row = $stmt->fetch()) {
-                                        ?>
+                                        while ($row = $stmt->fetch()) {?>
                                         <tr>
                                             <td><?=$row['user_id']?></td>
                                             <td><?=$row['fullname']?></td>

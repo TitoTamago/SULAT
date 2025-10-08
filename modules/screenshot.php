@@ -55,121 +55,125 @@ if (isset($_POST['edit'])) {
 
 <!-- Main content goes here -->
 <div class="container-fluid">
-    <div class="content">
-        <!-- Start Content-->
-        <div class="container-fluid">
 
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box">
-                        <h4 class="page-title">LIST OF SCREENSHOT</h4>
-                    </div>
-                </div>
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">Screenshot Manager</h4>
             </div>
-            <!-- end page title -->
+        </div>
+    </div>
+    <!-- end page title -->
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
+    <div class="row">
+        <!-- Right Sidebar -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
 
-                            <div class="table-responsive">
-                                <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="basic-datatable">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Screenshot ID</th>
-                                            <th>Username</th>
-                                            <th>Screenshot</th>
-                                            <th>Image Type</th>
-                                            <th>Create Date</th>
-                                            <th style="width: 75px;">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <?php
-                                        $stmt = $pdo->query("SELECT * FROM tbl_screenshot WHERE user_id = '".$_SESSION["user_id"]."'");
-
-                                        while ($row = $stmt->fetch()) {
-                                            $username = queryUniqueValue($pdo, "SELECT * FROM tbl_user WHERE user_id = :id", ['id' => $row['user_id']]);
-                                        ?>
-                                        <tr>
-                                            <td><?=$row['screenshot_id']?></td>
-                                            <td><?=$username['fullname'] ?? 'User not Available'?></td>
-                                            <td>
-                                                <!-- <img src="data:image/png;base64,<?=base64_encode($row['screenshot_data']);?>" width="200" /> -->
-
-                                                <center><button type="button" class="btn btn-info" onClick="veiwImage(<?=$row['screenshot_id']?>)" data-bs-toggle="modal"
-                                                        data-bs-target="#primary-header-modal"><i class="mdi mdi-image-area"></i>VIEW</button>
-                                                </center>
-                                            </td>
-                                            <td><?=$row['image_type']?></td>
-                                            <td><?=$row['created_at']?></td>
-                                            <td>
-                                                <center><button type="button" class="btn btn-danger" onClick="deleteData(<?=$row['user_id']?>)"><i class="mdi mdi-delete"></i>DELETE</button></center>
-                                            </td>
-                                        </tr>
-                                        <?php }?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
-            <!-- end row -->
-
-        </div> <!-- container -->
-
-    </div> <!-- content -->
-
-    <!-- Footer Start -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <script>
-                    document.write(new Date().getFullYear())
-                    </script> © Sulat
+                    <div class="mt-3">
+                        <h5 class="mb-2">Recent Screenshots</h5>
+                        <div class="row mx-n1 g-0">
+                            <?php $stmt = $pdo->query("SELECT *, OCTET_LENGTH(screenshot_data) AS file_size_bytes FROM tbl_screenshot WHERE user_id = '".$_SESSION["user_id"]."' ORDER BY created_at DESC");
+                            while ($row = $stmt->fetch()) {
+                            $fileSizeBytes = $row['file_size_bytes'];
+                            $fileSizeMB = round($fileSizeBytes / (1024 * 1024), 2);
+                            $screenshot_name = $row['screenshot_name'] ?: "screenshot_".$row['screenshot_id'].".".$row['image_type'];
+                            $username = queryUniqueValue($pdo, "SELECT * FROM tbl_user WHERE user_id = :id", ['id' => $row['user_id']]);
+                            ?>
+                            <div class="col-xxl-3 col-lg-6">
+                                <div class="card m-1 shadow-none border">
+                                    <div class="p-2">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <div class="avatar-sm">
+                                                    <span class="avatar-title bg-light text-secondary rounded">
+                                                        <img src="data:image/png;base64,<?=base64_encode($row['screenshot_data']);?>" width="100%" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col ps-0">
+                                                <div class="dropdown float-end">
+                                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="mdi mdi-dots-horizontal"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end" style="">
+                                                        <!-- View option -->
+                                                        <a class="dropdown-item" onClick="veiwImage(<?=$row['screenshot_id']?>)" data-bs-toggle="modal" data-bs-target="#primary-header-modal">View
+                                                            File</a>
+                                                        <!-- Rename option -->
+                                                        <a class="dropdown-item" onClick="renameFile(<?=$row['screenshot_id']?>)" href="javascript:void(0)">Rename File</a>
+                                                        <!-- Delete option -->
+                                                        <a class="dropdown-item" onClick="deleteData(<?=$row['screenshot_id']?>)">Delete File</a>
+                                                    </div>
+                                                </div>
+                                                <a href="javascript:void(0);" id="file-name-<?=$row['screenshot_id']?>" class="text-muted fw-bold"><?=$screenshot_name?></a>
+                                                <p class="mb-0 font-13"><?=$fileSizeMB?> MB</p>
+                                            </div>
+                                        </div> <!-- end row -->
+                                    </div> <!-- end .p-2-->
+                                </div> <!-- end col -->
+                            </div> <!-- end col-->
+                            <?php }?>
+                        </div> <!-- end row-->
+                    </div> <!-- end .mt-3-->
                 </div>
-                <div class="col-md-6">
-                    <div class="text-md-end footer-links d-none d-md-block">
-                        <a href="javascript: void(0);">About</a>
-                        <a href="javascript: void(0);">Support</a>
-                        <a href="javascript: void(0);">Contact Us</a>
-                    </div>
+                <!-- end card-body -->
+            </div> <!-- end card-box -->
+
+        </div> <!-- end Col -->
+    </div><!-- End row -->
+
+</div> <!-- container -->
+
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <script>
+                document.write(new Date().getFullYear())
+                </script> © Sulat
+            </div>
+            <div class="col-md-6">
+                <div class="text-md-end footer-links d-none d-md-block">
+                    <a href="javascript: void(0);">About</a>
+                    <a href="javascript: void(0);">Support</a>
+                    <a href="javascript: void(0);">Contact Us</a>
                 </div>
             </div>
         </div>
-        <!-- Primary Header Modal -->
-        <div id="primary-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="primary-header-modalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <form action="user.php" method="POST">
-                        <div class="modal-header modal-colored-header bg-primary">
-                            <h4 class="modal-title" id="primary-header-modalLabel">VIEW SCREENSHOT</h4>
-                        </div>
-                        <div class="modal-body" id="fetchdata">
+    </div>
+    <!-- Primary Header Modal -->
+    <div id="primary-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="primary-header-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="user.php" method="POST">
+                    <div class="modal-header modal-colored-header bg-primary">
+                        <h4 class="modal-title" id="primary-header-modalLabel">VIEW SCREENSHOT</h4>
+                    </div>
+                    <div class="modal-body" id="fetchdata">
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </form>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-    </footer>
-    <!-- end Footer -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</footer>
+<!-- end Footer -->
 </div>
 <script>
-function veiwImage(uid) {
+function veiwImage(uid, rename_status = false) {
     $.ajax({
         url: 'view-image.php',
         type: 'POST',
         data: {
-            screenshot_id: uid
+            screenshot_id: uid,
+            rename: rename_status
         },
         success: function(response) {
             console.log("success");
@@ -177,6 +181,106 @@ function veiwImage(uid) {
         }
     })
 };
+
+function renameFile(id) {
+    const nameElement = document.getElementById(`file-name-${id}`);
+    const oldName = nameElement.textContent.trim();
+
+    // Create input field
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = oldName;
+    input.className = "form-control form-control-sm d-inline-block";
+    input.style.width = "auto";
+    input.style.maxWidth = "220px";
+    input.style.display = "inline-block";
+    input.style.fontWeight = "bold";
+    input.style.color = "#6c757d";
+
+    // Replace link with input
+    nameElement.replaceWith(input);
+    input.focus();
+    input.select();
+
+    // Save on Enter
+    input.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            const newName = input.value.trim();
+            saveNewFileName(id, newName, oldName, input); // ✅ pass input
+        } else if (e.key === "Escape") {
+            cancelRename(input, oldName, id);
+        }
+    });
+
+    // Save when clicking outside
+    input.addEventListener("blur", function() {
+        const newName = input.value.trim();
+        saveNewFileName(id, newName, oldName, input); // ✅ pass input
+    });
+}
+
+function saveNewFileName(id, newName, oldName, input) {
+    // If unchanged or empty, revert
+    if (!newName || newName === oldName) {
+        revertToText(id, oldName, input);
+        return;
+    }
+
+    // AJAX rename
+    $.ajax({
+        url: '../modules/helper.php?f=renameScreenshot',
+        type: "POST",
+        data: {
+            uid: id,
+            new_name: newName
+        },
+        success: function(response) {
+            Swal.fire({
+                icon: "success",
+                title: "File Renamed",
+                text: `File renamed to "${newName}" successfully.`,
+                confirmButtonColor: "#727cf5",
+                timer: 1500,
+                showConfirmButton: false,
+            });
+
+            revertToText(id, newName, input); // ✅ always revert to <a>
+        },
+        error: function() {
+            Swal.fire({
+                icon: "error",
+                title: "Rename Failed",
+                text: "There was a problem renaming the file.",
+                confirmButtonColor: "#d33",
+            });
+
+            revertToText(id, oldName, input);
+        },
+    });
+}
+
+function cancelRename(input, oldName, id) {
+    revertToText(id, oldName, input);
+}
+
+function revertToText(id, fileName, input = null) {
+    const link = document.createElement("a");
+    link.href = "javascript:void(0);";
+    link.id = `file-name-${id}`;
+    link.className = "text-muted fw-bold";
+    link.textContent = fileName;
+
+    if (input && input.parentNode) {
+        input.parentNode.replaceChild(link, input);
+    } else {
+        const existingInput = document.querySelector("input");
+        if (existingInput && existingInput.parentNode) {
+            existingInput.parentNode.replaceChild(link, existingInput);
+        }
+    }
+}
+
 
 function deleteData(uid) {
     Swal.fire({
