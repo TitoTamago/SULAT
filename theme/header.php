@@ -3,10 +3,8 @@ include('../includes/init.php');
 ob_start();
 session_start();
 if (!isset($_SESSION['user_id'])){
-    $showLoginModal = true;
-} else{
-    $log_user_id = $_SESSION['user_id'];
-    $showLoginModal = null;
+    // Redirect to login page
+    header("Location: /SULAT/login.php"); // change "/" to your homepage URL if different
 }
 ?>
 
@@ -64,20 +62,20 @@ if (!isset($_SESSION['user_id'])){
             <!-- LOGO -->
             <a href="" class="logo text-center logo-light" disabled>
                 <span class="logo-lg">
-                    <img src="../theme/assets/images/logo.png" alt="" height="16">
+                    <img src="../theme/assets/images/logo.png" alt="" height="32">
                 </span>
                 <span class="logo-sm">
-                    <img src="../theme/assets/images/logo_sm.png" alt="" height="16">
+                    <img src="../theme/assets/images/logo_sm.png" alt="" height="32">
                 </span>
             </a>
 
             <!-- LOGO -->
             <a href="" class="logo text-center logo-dark" disabled>
                 <span class="logo-lg">
-                    <img src="../theme/assets/images/logo-dark.png" alt="" height="16">
+                    <img src="../theme/assets/images/logo-dark.png" alt="" height="32">
                 </span>
                 <span class="logo-sm">
-                    <img src="../theme/assets/images/logo_sm_dark.png" alt="" height="16">
+                    <img src="../theme/assets/images/logo_sm_dark.png" alt="" height="32">
                 </span>
             </a>
 
@@ -110,12 +108,14 @@ if (!isset($_SESSION['user_id'])){
 
                     <li class="side-nav-title side-nav-item">Utility</li>
 
+                    <?php if($_SESSION['role'] === "ADMIN"){?>
                     <li class="side-nav-item">
                         <a href="../modules/user.php" class="side-nav-link">
                             <i class="uil-rss"></i>
                             <span> System User </span>
                         </a>
                     </li>
+                    <?php }?>
 
                     <li class="side-nav-item">
                         <a href="../modules/screenshot.php" class="side-nav-link">
@@ -127,8 +127,8 @@ if (!isset($_SESSION['user_id'])){
                     <li class="side-nav-title side-nav-item mt-1">Other</li>
 
                     <li class="side-nav-item">
-                        <a href="widgets.html" class="side-nav-link">
-                            <i class="uil-layer-group"></i>
+                        <a href="../includes/clear.php" class="side-nav-link">
+                            <i class="uil-sign-out-alt"></i>
                             <span> Logout </span>
                         </a>
                     </li>

@@ -2,7 +2,7 @@
 include('../theme/header.php');
 include "../includes/google-search-api/search-handler.php";
 $searchLimitReached = checkSearchLimit();
-
+    
 
 ?>
 
@@ -29,6 +29,7 @@ canvas {
     display: block;
 }
 </style>
+
 <!-- Main content goes here -->
 <div class="container-fluid">
     <div class="content">

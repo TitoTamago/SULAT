@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Log In | SULAT</title>
+    <title>SULAT | LOGIN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -78,7 +78,6 @@
     <!-- end page -->
 
     <footer class="footer footer-alt">
-        2018 -
         <script>
         document.write(new Date().getFullYear())
         </script> © SULAT
