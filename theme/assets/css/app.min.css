@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
     --ct-link-color: #727cf5;
     --ct-link-hover-color: #6169d0;
@@ -494,7 +495,7 @@ body[data-leftbar-theme="light"] {
     --ct-font-sans-serif: "Nunito", sans-serif;
     --ct-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --ct-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-    --ct-body-font-family: Nunito, sans-serif;
+    --ct-body-font-family: "Montserrat", sans-serif;
     --ct-body-font-size: 0.9rem;
     --ct-body-font-weight: 400;
     --ct-body-line-height: 1.5;

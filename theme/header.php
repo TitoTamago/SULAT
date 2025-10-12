@@ -24,8 +24,8 @@ if (!isset($_SESSION['user_id'])){
     <link rel="shortcut icon" href="../theme/assets/images/favicon.ico">
 
     <!-- Core CSS -->
-    <link href="../theme/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../theme/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="../theme/assets/css/icons.modified.css" rel="stylesheet" type="text/css" />
+    <link href="../theme/assets/css/app.modified.css" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- Third Party CSS -->
     <link href="../theme/assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
@@ -118,9 +118,9 @@ if (!isset($_SESSION['user_id'])){
                     <?php }?>
 
                     <li class="side-nav-item">
-                        <a href="../modules/screenshot.php" class="side-nav-link">
+                        <a href="../modules/file_manager.php" class="side-nav-link">
                             <i class="uil-folder-plus"></i>
-                            <span> Screenshots </span>
+                            <span> File Manager </span>
                         </a>
                     </li>
 

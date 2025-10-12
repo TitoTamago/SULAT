@@ -18,7 +18,7 @@
 </head>
 
 <body class="authentication-bg" data-layout-config='{"darkMode":false}'>
-    <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+    <div class="account-pages">
         <div class="container">
             <div class="row justify-content-center">
                 <div id="login-container">
