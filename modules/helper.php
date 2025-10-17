@@ -1,5 +1,6 @@
 <?php
 require_once '../includes/init.php'; // Include your PDO connection
+session_start();
 
 // Handle the function call dynamically
 handleRequest();
@@ -53,6 +54,32 @@ function deleteScreenshot() {
             echo json_encode(['success' => true, 'message' => 'User deleted successfully.']);
         } else {
             echo json_encode(['success' => false, 'message' => 'Failed to delete user.']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'User ID is missing.']);
+    }
+}
+
+function createFolder() {
+    if (isset($_POST['folder_name'])) {
+        $folder_name = $_POST['folder_name'];  // Get the user ID to delete
+        
+        // Pass the $pdo to the deleteRecord function
+        global $pdo;  // Make sure to use the global $pdo here 
+        
+        $data = [
+            'd_name' => $folder_name,
+            'user_id' => $_SESSION['user_id'],
+            'created_at' => date("Y-m-d H:i:s"),
+        ];
+        
+        $result = addRecord($pdo, 'tbl_directory', $data);
+
+
+        if ($result === true) {
+            echo json_encode(['success' => true, 'message' => 'Folder created successfully.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to create Folder.']);
         }
     } else {
         echo json_encode(['success' => false, 'message' => 'User ID is missing.']);

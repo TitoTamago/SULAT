@@ -23,10 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Failed to decode base64.");
             }
 
+            
+            $default_directory = queryUniqueValue($pdo, "SELECT * FROM tbl_directory WHERE user_id LIKE :user_id OR d_name LIKE 'Default'", ['user_id' => $user_id]);
+
             // Save to database
-            $stmt = $pdo->prepare("INSERT INTO tbl_screenshot (user_id, screenshot_data, image_type, created_at) VALUES (:user_id, :screenshot_data, :image_type, NOW())");
+            $stmt = $pdo->prepare("INSERT INTO tbl_screenshot (user_id, screenshot_data, image_type, d_id, created_at) VALUES (:user_id, :screenshot_data, :image_type, :d_id, NOW())");
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->bindParam(':screenshot_data', $imageData, PDO::PARAM_LOB);
+            $stmt->bindParam(':d_id', $default_directory['d_id']);
             $stmt->bindParam(':image_type', $mimeType);
 
             if ($stmt->execute()) {

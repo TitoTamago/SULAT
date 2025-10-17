@@ -1,56 +1,9 @@
 <?php include('../includes/init.php');
 include('../theme/header.php');
 
-if (isset($_POST['SAVE'])) {
-    // Collect form data dynamically
-    $data = [
-        'fullname' => $_POST['fullname'],
-        'username' => $_POST['username'],
-        'email' => $_POST['email'],
-        'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-        'role' => $_POST['role']
-    ];
-
-    // Call the dynamic add function
-    $result = addRecord($pdo, 'tbl_user', $data);
-    
-    if ($result) {
-    $_SESSION["swal_fire"] = array(
-        "title" => "Save Successful",
-        "text" => "User successfully saved.",
-        "icon" => "success",
-        "timer" => 2000
-    );
-    header("Location: user.php");
-    exit(); // Always call exit() after header to stop further script execution
-    } else {
-        echo "Failed to add user!";
-    }
+if(isset($_GET['d_id'])){
+    $d_id = $_GET['d_id'];
 }
-
-if (isset($_POST['edit'])) {
-
-    // Get the user_id and collect form data dynamically
-    $user_id = $_POST['user_id'];
-    $data = [
-        'fullname' => $_POST['fullname'],
-        'username' => $_POST['username'],
-        'email' => $_POST['email'],
-        'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-        'role' => $_POST['role']
-    ];
-
-    // Call the dynamic edit function
-    $result = editRecord($pdo, 'tbl_user', $data, 'user_id', $user_id);
-    
-    if ($result) {
-        echo "User edited successfully!";
-    } else {
-        echo "Failed to edit user!";
-    }
-}
-
-
 ?>
 
 <!-- Main content goes here -->
@@ -73,19 +26,19 @@ if (isset($_POST['edit'])) {
             <div class="card">
                 <div class="card-body">
                     <!-- Left sidebar -->
-                    <div class="page-aside-left" style="height: 60dvh;overflow-y: auto;overflow-x: hidden; position:static;">
+                    <div class="page-aside-left" style="height: 60dvh; overflow-y: auto;overflow-x: hidden; position:static;">
                         <div class="btn-group d-block mb-2">
-                            <button type="button" class="btn btn-success w-100">
+                            <button type="button" onclick="createFolder()" class="btn btn-success w-100">
                                 <i class="mdi mdi-plus"></i> Create Folder
                             </button>
                         </div>
                         <div class="email-menu-list mt-3">
-                            <a href="#" class="list-group-item border-0"><i class="mdi mdi-folder-outline font-18 align-middle me-2"></i>Default</a>
-                            <a href="#" class="list-group-item border-0"><i class="mdi mdi-google-drive font-18 align-middle me-2"></i>Google Drive</a>
-                            <a href="#" class="list-group-item border-0"><i class="mdi mdi-dropbox font-18 align-middle me-2"></i>Dropbox</a>
-                            <a href="#" class="list-group-item border-0"><i class="mdi mdi-share-variant font-18 align-middle me-2"></i>Share with me</a>
-                            <a href="#" class="list-group-item border-0"><i class="mdi mdi-clock-outline font-18 align-middle me-2"></i>Recent</a>
-                            <a href="#" class="list-group-item border-0"><i class="mdi mdi-star-outline font-18 align-middle me-2"></i>Starred</a>
+                            <?php
+                                $stmt = $pdo->query("SELECT * FROM tbl_directory WHERE user_id = '".$_SESSION['user_id']."'");
+                            while ($row = $stmt->fetch()) {?>
+                            <a href="javascript:void(0)" onclick='redirectFolder(<?=$row["d_id"]?>)' class="list-group-item border-0"><i
+                                    class="mdi mdi-folder-outline font-18 align-middle me-2"></i><?=$row['d_name']?></a>
+                            <?php }?>
                         </div>
                     </div>
 
@@ -381,6 +334,47 @@ function revertToText(id, fileName, input = null) {
         }
     }
 }
+
+function redirectFolder(input, oldName, id) {
+    revertToText(id, oldName, input);
+}
+
+function createFolder(uid) {
+    Swal.fire({
+        title: 'Enter Folder Name',
+        input: 'text',
+        inputPlaceholder: 'Type here...',
+        showCancelButton: true,
+        confirmButtonText: 'Create',
+        preConfirm: (value) => {
+            if (!value) {
+                Swal.showValidationMessage('Please enter a Folder Name!')
+            }
+            return value
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'post',
+                url: '../modules/helper.php?f=createFolder', // helper.php is the file that contains the function for deleting a user
+                data: {
+                    folder_name: `${result.value}`
+                },
+                success: function(data) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Folder has been created successfully.',
+                        icon: 'success',
+                        timer: 2000,
+                    }).then((result) => {
+                        console.log(data);
+                        // window.location.href = 'file_manager.php'; // Change to your target URL
+                    });
+                }
+            });
+        }
+    })
+};
 
 
 function deleteData(uid) {
