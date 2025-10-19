@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <?php endif; ?>
 setTimeout(() => {
 
-    console.clear();
+    // console.clear();
 }, 500);
 </script>
 

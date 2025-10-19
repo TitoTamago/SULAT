@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             
-            $default_directory = queryUniqueValue($pdo, "SELECT * FROM tbl_directory WHERE user_id LIKE :user_id OR d_name LIKE 'Default'", ['user_id' => $user_id]);
+            $default_directory = queryUniqueValue($pdo, "SELECT * FROM tbl_directory WHERE user_id LIKE :user_id AND d_name LIKE 'Default'", ['user_id' => $user_id]);
 
             // Save to database
             $stmt = $pdo->prepare("INSERT INTO tbl_screenshot (user_id, screenshot_data, image_type, d_id, created_at) VALUES (:user_id, :screenshot_data, :image_type, :d_id, NOW())");
