@@ -19,96 +19,95 @@ document.getElementById("captureScreenshot").addEventListener("click", function 
 });
 
 function enableSelection() {
+
+        // Disable scroll during selection
+        document.body.style.touchAction = "none";
     let selectionBox = null;
     let startX, startY, endX, endY;
     let isSelecting = false;
 
-    // The mouse down event to start selection
-    const onMouseDown = (e) => {
-        if (e.button !== 0) return; // Only left-click to start selection
+    const getPos = (e) => {
+        return {
+            x: e.clientX + window.scrollX,
+            y: e.clientY + window.scrollY,
+            rawX: e.clientX,
+            rawY: e.clientY
+        };
+    };
+    
+    const onPointerDown = (e) => {
+        if (e.button !== 0 && e.pointerType === "mouse") return; // Only left-click for mouse
+        
         isSelecting = true;
+        const pos = getPos(e);
 
-        // Get the starting position (account for scroll)
-        mouseX = e.pageX;
-        mouseY = e.pageY;
+        startX = pos.x;
+        startY = pos.y;
 
-        // Get the starting position (account for scroll)
-        startX = e.pageX + window.scrollX;
-        startY = e.pageY + window.scrollY;
-
-        // Create the selection box
         selectionBox = document.createElement("div");
         selectionBox.style.position = "absolute";
-        selectionBox.style.zIndex = "10000"; // high z-index to ensure it is on top
+        selectionBox.style.zIndex = "10000";
         selectionBox.style.border = "2px dashed red";
         selectionBox.style.background = "rgba(255, 0, 0, 0.2)";
-        selectionBox.style.left = `${mouseX}px`;
-        selectionBox.style.top = `${mouseY}px`;
+        selectionBox.style.left = `${pos.rawX}px`;
+        selectionBox.style.top = `${pos.rawY}px`;
+
         document.body.appendChild(selectionBox);
     };
 
-    // The mouse move event to resize and reposition the selection box
-    const onMouseMove = (e) => {
+    const onPointerMove = (e) => {
         if (!isSelecting || !selectionBox) return;
+        e.preventDefault(); // 🚀 stops scrolling on mobile while dragging
 
-        // Get the end position (account for scroll)
-        mouse_endX = e.pageX;
-        mouse_endY = e.pageY;
+        const pos = getPos(e);
 
-        // Get the end position (account for scroll)
-        endX = e.pageX + window.scrollX;
-        endY = e.pageY + window.scrollY;
+        endX = pos.x;
+        endY = pos.y;
 
-        // Update the size and position of the selection box
-        selectionBox.style.width = `${Math.abs(mouse_endX - mouseX)}px`;
-        selectionBox.style.height = `${Math.abs(mouse_endY - mouseY)}px`;
-        selectionBox.style.left = `${Math.min(mouseX, mouse_endX)}px`;
-        selectionBox.style.top = `${Math.min(mouseY, mouse_endY)}px`;
+        selectionBox.style.width = `${Math.abs(pos.rawX - (startX - window.scrollX))}px`;
+        selectionBox.style.height = `${Math.abs(pos.rawY - (startY - window.scrollY))}px`;
+        selectionBox.style.left = `${Math.min(startX - window.scrollX, pos.rawX)}px`;
+        selectionBox.style.top = `${Math.min(startY - window.scrollY, pos.rawY)}px`;
     };
 
-    // The mouse up event to capture the selection area
-    const onMouseUp = async (e) => {
+
+    const onPointerUp = async (e) => {
         if (!isSelecting) return;
         isSelecting = false;
+        
+        // Re-enable scroll after selection
+        document.body.style.touchAction = "auto";
 
-        // Remove event listeners after the selection is done
-        document.removeEventListener("mousedown", onMouseDown);
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", onMouseUp);
+        document.removeEventListener("pointerdown", onPointerDown);
+        document.removeEventListener("pointermove", onPointerMove);
+        document.removeEventListener("pointerup", onPointerUp);
 
-        // Remove the selection box
-        if (selectionBox) {
-            document.body.removeChild(selectionBox);
-        }
+        if (selectionBox) selectionBox.remove();
 
-        // Calculate the selected area based on mouse positions
         const captureArea = {
             x: Math.min(startX, endX),
             y: Math.min(startY, endY),
             width: Math.abs(endX - startX),
-            height: Math.abs(endY - startY),
+            height: Math.abs(endY - startY)
         };
 
-        // Use html2canvas to capture the selected area (adjusted for scroll)
         const canvas = await html2canvas(document.body, {
-            x: captureArea.x - window.scrollX, // Adjust x based on scroll position
-            y: captureArea.y - window.scrollY, // Adjust y based on scroll position
+            x: captureArea.x - window.scrollX,
+            y: captureArea.y - window.scrollY,
             width: captureArea.width,
             height: captureArea.height,
-            scrollX: window.scrollX, // Adjust the scroll position for accurate capture
-            scrollY: window.scrollY, // Adjust the scroll position for accurate capture
-            useCORS: true, // Enable CORS to capture content from other origins
-            allowTaint: true, // Allow tainted images to be captured
+            scrollX: window.scrollX,
+            scrollY: window.scrollY,
+            useCORS: true,
+            allowTaint: true,
         });
 
-        // Open the editor with the captured canvas
         openEditor(canvas);
     };
 
-    // Add event listeners for mouse actions
-    document.addEventListener("mousedown", onMouseDown);
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("pointermove", onPointerMove);
+    document.addEventListener("pointerup", onPointerUp);
 }
 
 function openEditor(canvas) {

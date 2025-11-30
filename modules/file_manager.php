@@ -118,7 +118,7 @@ if(isset($_GET['d_id'])){
                                                     <!-- Selection Checkbox -->
                                                     <input type="checkbox" class="form-check-input file-select" value="<?=$row['screenshot_id']?>" />
                                                 </div>
-                                                <div class="col-auto">
+                                                <div class="col-auto" style="overflow: hidden;">
                                                     <div class="avatar-sm">
                                                         <span class="avatar-title bg-light text-secondary rounded">
                                                             <img src="data:image/png;base64,<?=base64_encode($row['screenshot_data']);?>" width="100%" />

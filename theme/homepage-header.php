@@ -54,19 +54,13 @@
                 <!-- left menu -->
                 <ul class="navbar-nav me-auto align-items-center">
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link  " href="index.php">Home</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="group-intro.php">The Team</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Purpose</a>
-                    </li>
-                    <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">FAQs</a>
+                        <a class="nav-link" href="documentation.php">Documentation</a>
                     </li>
                 </ul>
 

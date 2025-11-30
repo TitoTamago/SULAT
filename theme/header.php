@@ -148,7 +148,7 @@ if (!isset($_SESSION['user_id'])){
             <div class="navbar-custom">
                 <ul class="list-unstyled topbar-menu float-end mb-0">
 
-                    <li class="dropdown notification-list d-none d-sm-inline-block">
+                    <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="dripicons-view-apps noti-icon"></i>
                         </a>

@@ -1,13 +1,13 @@
 <?php include "theme/homepage-header.php";?>
 <style>
-* {
+#group-intro * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-body {
+#group-intro body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@ body {
     overflow: hidden;
 }
 
-.about-title {
+#group-intro .about-title {
     font-size: 7.5rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -30,23 +30,25 @@ body {
     white-space: nowrap;
     font-family: "Arial Black", "Arial Bold", Arial, sans-serif;
     background: linear-gradient(to bottom,
-            rgb(8 42 123 / 35%) 30%,
+            rgb(255 255 255 / 35%) 30%,
             rgb(255 255 255 / 0%) 76%);
+
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
-.carousel-container {
+#group-intro .carousel-container {
     width: 100%;
     max-width: 1200px;
+    margin: auto;
     height: 450px;
     position: relative;
     perspective: 1000px;
     margin-top: 80px;
 }
 
-.carousel-track {
+#group-intro .carousel-track {
     width: 100%;
     height: 100%;
     display: flex;
@@ -57,7 +59,7 @@ body {
     transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.card {
+#group-intro .card {
     position: absolute;
     width: 280px;
     height: 380px;
@@ -69,75 +71,75 @@ body {
     cursor: pointer;
 }
 
-.card img {
+#group-intro .card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.card.center {
+#group-intro .card.center {
     z-index: 10;
     transform: scale(1.1) translateZ(0);
 }
 
-.card.center img {
+#group-intro .card.center img {
     filter: none;
 }
 
-.card.left-2 {
+#group-intro .card.left-2 {
     z-index: 1;
     transform: translateX(-400px) scale(0.8) translateZ(-300px);
     opacity: 0.7;
 }
 
-.card.left-2 img {
+#group-intro .card.left-2 img {
     filter: grayscale(100%);
 }
 
-.card.left-1 {
+#group-intro .card.left-1 {
     z-index: 5;
     transform: translateX(-200px) scale(0.9) translateZ(-100px);
     opacity: 0.9;
 }
 
-.card.left-1 img {
+#group-intro .card.left-1 img {
     filter: grayscale(100%);
 }
 
-.card.right-1 {
+#group-intro .card.right-1 {
     z-index: 5;
     transform: translateX(200px) scale(0.9) translateZ(-100px);
     opacity: 0.9;
 }
 
-.card.right-1 img {
+#group-intro .card.right-1 img {
     filter: grayscale(100%);
 }
 
-.card.right-2 {
+#group-intro .card.right-2 {
     z-index: 1;
     transform: translateX(400px) scale(0.8) translateZ(-300px);
     opacity: 0.7;
 }
 
-.card.right-2 img {
+#group-intro .card.right-2 img {
     filter: grayscale(100%);
 }
 
-.card.hidden {
+#group-intro .card.hidden {
     opacity: 0;
     pointer-events: none;
 }
 
-.member-info {
+#group-intro .member-info {
     text-align: center;
     margin-top: 40px;
     transition: all 0.5s ease-out;
 }
 
-.member-name {
-    color: rgb(8, 42, 123);
+#group-intro .member-name {
+    color: rgba(219, 225, 238, 1);
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 10px;
@@ -145,26 +147,26 @@ body {
     display: inline-block;
 }
 
-.member-name::before,
-.member-name::after {
+#group-intro .member-name::before,
+#group-intro .member-name::after {
     content: "";
     position: absolute;
     top: 100%;
     width: 100px;
     height: 2px;
-    background: rgb(8, 42, 123);
+    background: rgba(172, 176, 185, 1);
 }
 
-.member-name::before {
+#group-intro .member-name::before {
     left: -120px;
 }
 
-.member-name::after {
+#group-intro .member-name::after {
     right: -120px;
 }
 
-.member-role {
-    color: #848696;
+#group-intro .member-role {
+    color: #cccccfff;
     font-size: 1.5rem;
     font-weight: 500;
     opacity: 0.8;
@@ -175,14 +177,14 @@ body {
     position: relative;
 }
 
-.dots {
+#group-intro .dots {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 60px;
 }
 
-.dot {
+#group-intro .dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -191,12 +193,12 @@ body {
     transition: all 0.3s ease;
 }
 
-.dot.active {
+#group-intro .dot.active {
     background: rgb(8, 42, 123);
     transform: scale(1.2);
 }
 
-.nav-arrow {
+#group-intro .nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -217,141 +219,137 @@ body {
     padding-bottom: 4px;
 }
 
-.nav-arrow:hover {
+#group-intro .nav-arrow:hover {
     background: rgba(0, 0, 0, 0.8);
     transform: translateY(-50%) scale(1.1);
 }
 
-.nav-arrow.left {
+#group-intro .nav-arrow.left {
     left: 20px;
     padding-right: 3px;
 }
 
-.nav-arrow.right {
+#group-intro .nav-arrow.right {
     right: 20px;
     padding-left: 3px;
 }
 
 @media (max-width: 768px) {
-    .about-title {
+    #group-intro .about-title {
         font-size: 4.5rem;
     }
 
-    .card {
+    #group-intro .card {
         width: 200px;
         height: 280px;
     }
 
-    .card.left-2 {
+    #group-intro .card.left-2 {
         transform: translateX(-250px) scale(0.8) translateZ(-300px);
     }
 
-    .card.left-1 {
+    #group-intro .card.left-1 {
         transform: translateX(-120px) scale(0.9) translateZ(-100px);
     }
 
-    .card.right-1 {
+    #group-intro .card.right-1 {
         transform: translateX(120px) scale(0.9) translateZ(-100px);
     }
 
-    .card.right-2 {
+    #group-intro .card.right-2 {
         transform: translateX(250px) scale(0.8) translateZ(-300px);
     }
 
-    .member-name {
+    #group-intro .member-name {
         font-size: 2rem;
     }
 
-    .member-role {
+    #group-intro .member-role {
         font-size: 1.2rem;
     }
 
-    .member-name::before,
-    .member-name::after {
+    #group-intro .member-name::before,
+    #group-intro .member-name::after {
         width: 50px;
     }
 
-    .member-name::before {
+    #group-intro .member-name::before {
         left: -70px;
     }
 
-    .member-name::after {
+    #group-intro .member-name::after {
         right: -70px;
     }
 }
 </style>
 
-<h1 class="about-title">OUR GROUP</h1>
+<!-- START HERO -->
+<section class="hero-section" id='group-intro'>
 
-<div class="carousel-container">
-    <button class="nav-arrow left">‹</button>
-    <div class="carousel-track">
-        <div class="card" data-index="0">
-            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Team Member 1">
+    <h1 class="about-title">OUR TEAM</h1>
+
+    <div class="carousel-container">
+        <button class="nav-arrow left">‹</button>
+        <div class="carousel-track">
+            <div class="card" data-index="0">
+                <img src="theme\assets\images\members-img\G07_Falcunaya.png" alt="Team Member 1">
+            </div>
+            <div class="card" data-index="1">
+                <img src="theme\assets\images\members-img\G08_Flores.jpeg" alt="Team Member 2">
+            </div>
+            <div class="card" data-index="2">
+                <img src="theme\assets\images\members-img\G10_Garde.jpeg" alt="Team Member 3">
+            </div>
+            <div class="card" data-index="3">
+                <img src="theme\assets\images\members-img\G20_Talavera.jpg" alt="Team Member 4">
+            </div>
+            <div class="card" data-index="4">
+                <img src="theme\assets\images\members-img\G21_Untalan.jpeg" alt="Team Member 5">
+            </div>
         </div>
-        <div class="card" data-index="1">
-            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Team Member 2">
-        </div>
-        <div class="card" data-index="2">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmVzc2lvbmFsJTIwcGVvcGxlfGVufDB8fDB8fHww"
-                alt="Team Member 3">
-        </div>
-        <div class="card" data-index="3">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cHJvZmVzc2lvbmFsJTIwcGVvcGxlfGVufDB8fDB8fHww"
-                alt="Team Member 4">
-        </div>
-        <div class="card" data-index="4">
-            <img src="https://images.unsplash.com/photo-1655249481446-25d575f1c054?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fHByb2Zlc3Npb25hbCUyMHBlb3BsZXxlbnwwfHwwfHx8MA%3D%3D"
-                alt="Team Member 5">
-        </div>
-        <div class="card" data-index="5">
-            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=3687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Team Member 6">
-        </div>
+        <button class="nav-arrow right">›</button>
     </div>
-    <button class="nav-arrow right">›</button>
-</div>
 
-<div class="member-info">
-    <h2 class="member-name">David Kim</h2>
-    <p class="member-role">Founder</p>
-</div>
+    <div class="member-info">
+        <h2 class="member-name">David Kim</h2>
+        <p class="member-role">Founder</p>
+    </div>
 
-<div class="dots">
-    <div class="dot active" data-index="0"></div>
-    <div class="dot" data-index="1"></div>
-    <div class="dot" data-index="2"></div>
-    <div class="dot" data-index="3"></div>
-    <div class="dot" data-index="4"></div>
-    <div class="dot" data-index="5"></div>
-</div>
+    <div class="dots">
+        <div class="dot active" data-index="0"></div>
+        <div class="dot" data-index="1"></div>
+        <div class="dot" data-index="2"></div>
+        <div class="dot" data-index="3"></div>
+        <div class="dot" data-index="4"></div>
+    </div>
+
+</section>
+<!-- END HERO -->
 
 <script>
 const teamMembers = [{
-        name: "Emily Kim",
-        role: "Founder"
+        name: "Hannah Lorayne Falcunaya",
+        role: "Member"
     },
     {
-        name: "Michael Steward",
-        role: "Creative Director"
+        name: "Lovevynia Kian Flores",
+        role: "Member"
     },
     {
-        name: "Emma Rodriguez",
-        role: "Lead Developer"
+        name: "Joanna Paulene Garde",
+        role: "Member"
     },
     {
-        name: "Julia Gimmel",
-        role: "UX Designer"
+        name: "Helene Marithe Talavera",
+        role: "Member"
     },
     {
         name: "Lisa Anderson",
-        role: "Marketing Manager"
+        role: "Member"
     },
     {
-        name: "James Wilson",
-        role: "Product Manager"
+        name: "Luociea Lopez Untalan",
+        role: "Member"
     }
 ];
 

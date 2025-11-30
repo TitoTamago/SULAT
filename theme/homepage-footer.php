@@ -50,9 +50,9 @@
                 <h5 class="text-light">Discover </h5>
 
                 <ul class="list-unstyled ps-0 mb-0 mt-3">
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Open AI</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Google Vision</a></li>
-                    <li class="mt-2"><a href="javascript: void(0);" class="text-muted">Hyper Template</a></li>
+                    <li class="mt-2"><a href="https://openai.com/" class="text-muted">Open AI</a></li>
+                    <li class="mt-2"><a href="https://cloud.google.com/vision" class="text-muted">Google Vision</a></li>
+                    <li class="mt-2"><a href="https://coderthemes.com/hyper/" class="text-muted">Hyper Template</a></li>
                 </ul>
             </div>
         </div>
@@ -63,7 +63,7 @@
                     <p class="text-muted mt-4 text-center mb-0">© 2024 -
                         <script>
                         document.write(new Date().getFullYear())
-                        </script> SULAT. Design and coded by {names of the students}
+                        </script> SULAT. Design and coded by the <a href="group-intro.php" class="">Team</a>
                     </p>
                 </div>
             </div>
