@@ -87,9 +87,9 @@ function createFolder() {
 }
 
 
-function editFolder() {
+function renameFolder() {
     if (isset($_POST['d_id'])) {
-        $folder_name = $_POST['folder_name'];  // Get the user ID to delete
+        $folder_name = $_POST['d_name'];  // Get the user ID to delete
         
         // Pass the $pdo to the deleteRecord function
         global $pdo;  // Make sure to use the global $pdo here 

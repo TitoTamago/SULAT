@@ -56,7 +56,7 @@ if(isset($_GET['d_id'])){
                                 <button type="button" onclick="createFolder()" style="font-size: 1.3rem;" class="btn btn-success w-100">
                                     <i class="mdi mdi-archive-plus"></i>
                                 </button>
-                                <button type="button" onclick="editFolder()" style="font-size: 1.3rem;" class="btn btn-warning w-100">
+                                <button type="button" onclick="renameFolder()" style="font-size: 1.3rem;" class="btn btn-warning w-100">
                                     <i class="mdi mdi-archive-edit"></i>
                                 </button>
                                 <button type="button" onclick="deleteFolder()" style="font-size: 1.3rem;" class="btn btn-danger w-100">
@@ -495,6 +495,124 @@ function createFolder(uid) {
         }
     })
 };
+
+function renameFolder(folders) {
+    folders = [
+        <?php $stmt = $pdo->query("SELECT * FROM tbl_directory WHERE user_id = '".$_SESSION['user_id']."' AND d_name NOT LIKE 'Default'");
+        while ($row = $stmt->fetch()) {?> {
+            id: <?=$row['d_id']?>,
+            name: '<?=$row['d_name']?>'
+        },
+        <?php }?>
+    ]
+
+    let options = '';
+    folders.forEach(f => {
+        options += `<option value="${f.id}">${f.name}</option>`;
+    });
+
+    Swal.fire({
+        title: 'Rename Folder',
+        html: `
+            <select id="folder-select" class="swal2-input">
+                <option value="">Select folder</option>
+                ${options}
+            </select>
+            <input id="new-folder-name" class="swal2-input" placeholder="New folder name">
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Rename',
+        focusConfirm: false,
+        preConfirm: () => {
+            const folderId = document.getElementById('folder-select').value;
+            const newName = document.getElementById('new-folder-name').value.trim();
+
+            if (!folderId) {
+                Swal.showValidationMessage('Please select a folder');
+                return false;
+            }
+            if (!newName) {
+                Swal.showValidationMessage('Please enter a new folder name');
+                return false;
+            }
+
+            return {
+                folderId,
+                newName
+            };
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.post('../modules/helper.php?f=renameFolder', {
+                d_id: result.value.folderId,
+                d_name: result.value.newName
+            }, () => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Renamed!',
+                    text: 'Folder renamed successfully.',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => location.reload());
+            });
+        }
+    });
+}
+
+function deleteFolder(folders) {
+
+    folders = [
+        <?php $stmt = $pdo->query("SELECT * FROM tbl_directory WHERE user_id = '".$_SESSION['user_id']."' AND d_name NOT LIKE 'Default'");
+        while ($row = $stmt->fetch()) {?> {
+            id: <?=$row['d_id']?>,
+            name: '<?=$row['d_name']?>'
+        },
+        <?php }?>
+    ]
+
+    let options = '';
+    folders.forEach(f => {
+        options += `<option value="${f.id}">${f.name}</option>`;
+    });
+
+    Swal.fire({
+        title: 'Delete Folder',
+        html: `
+            <select id="delete-folder-select" class="swal2-input">
+                <option value="">Select folder</option>
+                ${options}
+            </select>
+        `,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        confirmButtonColor: '#d33',
+        focusConfirm: false,
+        preConfirm: () => {
+            const folderId = document.getElementById('delete-folder-select').value;
+            if (!folderId) {
+                Swal.showValidationMessage('Please select a folder');
+                return false;
+            }
+            return folderId;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.post('../modules/helper.php?f=deleteFolder', {
+                d_id: result.value
+            }, () => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'Folder deleted successfully.',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => location.reload());
+            });
+        }
+    });
+}
+
 
 function revertToText(id, fileName, input = null) {
     const link = document.createElement("a");
