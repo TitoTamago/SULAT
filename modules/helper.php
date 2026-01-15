@@ -38,7 +38,7 @@ function renameScreenshot() {
         // Call the dynamic edit function
         $result = editRecord($pdo, 'tbl_screenshot', $data, 'screenshot_id', $screenshot_id);
     } else {
-        echo json_encode(['success' => false, 'message' => 'User ID is missing.']);
+        echo json_encode(['success' => false, 'message' => 'Screenshot ID is missing.']);
     }
 }
 
@@ -51,12 +51,12 @@ function deleteScreenshot() {
         $result = deleteRecord($pdo, 'tbl_screenshot', 'screenshot_id', $uid);
 
         if ($result === true) {
-            echo json_encode(['success' => true, 'message' => 'User deleted successfully.']);
+            echo json_encode(['success' => true, 'message' => 'Screenshot deleted successfully.']);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to delete user.']);
+            echo json_encode(['success' => false, 'message' => 'Failed to delete Screenshot.']);
         }
     } else {
-        echo json_encode(['success' => false, 'message' => 'User ID is missing.']);
+        echo json_encode(['success' => false, 'message' => 'Screenshot ID is missing.']);
     }
 }
 
@@ -82,7 +82,52 @@ function createFolder() {
             echo json_encode(['success' => false, 'message' => 'Failed to create Folder.']);
         }
     } else {
-        echo json_encode(['success' => false, 'message' => 'User ID is missing.']);
+        echo json_encode(['success' => false, 'message' => 'Folder ID is missing.']);
+    }
+}
+
+
+function editFolder() {
+    if (isset($_POST['d_id'])) {
+        $folder_name = $_POST['folder_name'];  // Get the user ID to delete
+        
+        // Pass the $pdo to the deleteRecord function
+        global $pdo;  // Make sure to use the global $pdo here 
+        
+        $data = [
+            'd_name' => $folder_name,
+        ];
+
+        
+        // Call the dynamic edit function
+        $result = editRecord($pdo, 'tbl_directory', $data, 'd_id', $_POST['d_id']);
+
+
+        if ($result === true) {
+            echo json_encode(['success' => true, 'message' => 'Folder created successfully.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to create Folder.']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Folder ID is missing.']);
+    }
+}
+
+function deleteFolder() {
+    if (isset($_POST['d_id'])) {
+        $d_id = $_POST['d_id'];  // Get the user ID to delete
+        
+        // Pass the $pdo to the deleteRecord function
+        global $pdo;  // Make sure to use the global $pdo here
+        $result = deleteRecord($pdo, 'tbl_directory', 'd_id', $d_id);
+
+        if ($result === true) {
+            echo json_encode(['success' => true, 'message' => 'Folder deleted successfully.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to delete Folder.']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Folder ID is missing.']);
     }
 }
 ?>

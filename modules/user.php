@@ -70,6 +70,12 @@ if (isset($_POST['EDIT'])) {
 
 ?>
 
+<style>
+.background {
+    color: blue;
+}
+</style>
+
 <!-- Main content goes here -->
 <div class="container-fluid">
     <div class="content">

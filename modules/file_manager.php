@@ -7,7 +7,7 @@ if(isset($_GET['d_id'])){
     $d_id = $_GET['d_id'];
 } else {
     $default_directory = queryUniqueValue($pdo, "SELECT * FROM tbl_directory WHERE user_id LIKE :user_id AND d_name LIKE 'Default'", ['user_id' => $user_id]);
-    $d_id = $default_directory['d_id'];
+    $d_id = $default_directory['d_id'] ?? '';
 }
 ?>
 
@@ -51,9 +51,18 @@ if(isset($_GET['d_id'])){
                     <!-- Left sidebar -->
                     <div class="page-aside-left" style="height: 60dvh; overflow-y: auto;overflow-x: hidden; position:static;">
                         <div class="btn-group d-block mb-2">
-                            <button type="button" onclick="createFolder()" class="btn btn-success w-100">
-                                <i class="mdi mdi-archive-plus"></i> Create Folder
-                            </button>
+                            <!-- Button Group -->
+                            <div class="btn-group mb-2 w-100">
+                                <button type="button" onclick="createFolder()" style="font-size: 1.3rem;" class="btn btn-success w-100">
+                                    <i class="mdi mdi-archive-plus"></i>
+                                </button>
+                                <button type="button" onclick="editFolder()" style="font-size: 1.3rem;" class="btn btn-warning w-100">
+                                    <i class="mdi mdi-archive-edit"></i>
+                                </button>
+                                <button type="button" onclick="deleteFolder()" style="font-size: 1.3rem;" class="btn btn-danger w-100">
+                                    <i class="mdi mdi-archive-minus"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="email-menu-list mt-3">
                             <?php
@@ -78,20 +87,20 @@ if(isset($_GET['d_id'])){
                             </div>
                             <div>
                                 <!-- Move Files Button -->
-                                <button <button type="button" class="btn btn-sm" id="btn-move-files" disabled>
-                                    <i class="mdi mdi-content-save-move" data-bs-toggle="popover" data-bs-trigger="hover" title="Move Files"
+                                <button type="button" class="btn btn-sm" id="btn-move-files" disabled>
+                                    <i class="mdi mdi-content-save-move" data-bs-toggle="popover" style="font-size: 1.3rem;" data-bs-trigger="hover" title="Move Files"
                                         data-bs-content="Select multiple files and move them to another folder."></i>
                                 </button>
 
                                 <!-- List View Button -->
                                 <button type="button" class="btn btn-sm" id="btn-list">
-                                    <i class="mdi mdi-format-list-bulleted" data-bs-toggle="popover" data-bs-trigger="hover" title="List View"
+                                    <i class="mdi mdi-format-list-bulleted" data-bs-toggle="popover" style="font-size: 1.3rem;" data-bs-trigger="hover" title="List View"
                                         data-bs-content="Display files in a single-column list layout with detailed information."></i>
                                 </button>
 
                                 <!-- Grid View Button -->
                                 <button type="button" class="btn btn-sm btn-light" id="btn-grid">
-                                    <i class="mdi mdi-view-grid" data-bs-toggle="popover" data-bs-trigger="hover" title="Grid View"
+                                    <i class="mdi mdi-view-grid" data-bs-toggle="popover" style="font-size: 1.3rem;" data-bs-trigger="hover" title="Grid View"
                                         data-bs-content="Display files in a grid layout with thumbnail previews."></i>
                                 </button>
 
@@ -486,6 +495,23 @@ function createFolder(uid) {
         }
     })
 };
+
+function revertToText(id, fileName, input = null) {
+    const link = document.createElement("a");
+    link.href = "javascript:void(0);";
+    link.id = `file-name-${id}`;
+    link.className = "text-muted fw-bold";
+    link.textContent = fileName;
+
+    if (input && input.parentNode) {
+        input.parentNode.replaceChild(link, input);
+    } else {
+        const existingInput = document.querySelector("input");
+        if (existingInput && existingInput.parentNode) {
+            existingInput.parentNode.replaceChild(link, existingInput);
+        }
+    }
+}
 
 
 function deleteData(uid) {

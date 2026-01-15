@@ -113,6 +113,16 @@ if ($action === "register") {
     ];
 
     $result = addRecord($pdo, 'tbl_user', $data);
+
+    $last_created_user = queryUniqueValue($pdo, "SELECT user_id FROM tbl_user ORDER BY `tbl_user`.`user_id` DESC");
+
+    $data1 = [
+            'd_name' => "Default",
+            'user_id' => $last_created_user['user_id'],
+            'created_at' => date("Y-m-d H:i:s"),
+        ];
+        
+    $result1 = addRecord($pdo, 'tbl_directory', $data1);
     $response = [
         "fullname" => $fullname,
         "username" => $username,
