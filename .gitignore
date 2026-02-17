@@ -5,6 +5,7 @@ modules/openAI-key.json
 
 # Ignore vendor folder inside includes/
 includes/vendor/
+includes/google-search-api/cache/
 
 # Optional: Ignore OS and IDE files
 .DS_Store
