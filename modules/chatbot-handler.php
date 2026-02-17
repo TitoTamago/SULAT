@@ -3,19 +3,24 @@ include('../includes/init.php');
 include('../includes/google-search-api/search-handler.php');
 session_start();
 
-// Check if logged in
-$user_id = $_SESSION['user_id'] ?? 0;
+header('Content-Type: application/json');
+
+// ============================
+// CHECK LOGIN
+// ============================
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+
 if ($user_id == 0) {
     http_response_code(403);
     echo json_encode(['error' => 'Unauthorized']);
     exit;
 }
 
-// ----------------------------
+// ============================
 // FOLLOW-UP QUESTION DETECTION
-// ----------------------------
+// ============================
 function isFollowUp($text) {
-    $patterns = [
+    $patterns = array(
         '/what year/i',
         '/when/i',
         '/how about/i',
@@ -32,141 +37,202 @@ function isFollowUp($text) {
         '/can you explain/i',
         '/more details/i',
         '/how so/i'
-    ];
+    );
+
     foreach ($patterns as $p) {
         if (preg_match($p, $text)) return true;
     }
+
     return false;
 }
 
-// ----------------------------
+// ============================
 // HANDLE POST REQUEST
-// ----------------------------
+// ============================
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
+
     $input = trim($_POST['message']);
+
     if ($input === '') {
         echo json_encode(['error' => 'Empty message']);
         exit;
     }
 
-    // Load API key
+    // ============================
+    // LOAD OPENAI API KEY FROM JSON
+    // ============================
     $JSON_KEY = __DIR__ . '/openAI-key.json';
-    if (!file_exists($JSON_KEY)) {
-        throw new Exception("Config file not found: $JSON_KEY");
-    }
-    $config = json_decode(file_get_contents($JSON_KEY), true);
-    $OPENAI_API_KEY = $config['api_key'] ?? null;
 
-    // ----------------------------
-    // LOAD OR INITIALIZE CONVERSATION HISTORY
-    // ----------------------------
+    if (!file_exists($JSON_KEY)) {
+        echo json_encode(['error' => 'OpenAI config file not found']);
+        exit;
+    }
+
+    $config = json_decode(file_get_contents($JSON_KEY), true);
+
+    if (!isset($config['api_key'])) {
+        echo json_encode(['error' => 'API key missing in config']);
+        exit;
+    }
+
+    $OPENAI_API_KEY = $config['api_key'];
+
+    // ============================
+    // INITIALIZE SESSION MEMORY
+    // ============================
     if (!isset($_SESSION['conversation_history'])) {
-        $_SESSION['conversation_history'] = [];
+        $_SESSION['conversation_history'] = array();
     }
 
     $conversationHistory = $_SESSION['conversation_history'];
 
-    // ----------------------------
-    // FOLLOW-UP QUERY HANDLING
-    // ----------------------------
-    $filtered = array_filter($conversationHistory, fn($m) => $m['role'] === 'user');
-    $last_question = !empty($filtered) ? end($filtered)['content'] : null;
+    // ============================
+    // FOLLOW-UP HANDLING
+    // ============================
+    $lastUserMessage = null;
+
+    foreach (array_reverse($conversationHistory) as $msg) {
+        if ($msg['role'] === 'user') {
+            $lastUserMessage = $msg['content'];
+            break;
+        }
+    }
 
     $searchQuery = $input;
-    if ($last_question && isFollowUp($input)) {
-        $searchQuery = $last_question . " " . $input;
+
+    if ($lastUserMessage && isFollowUp($input)) {
+        $searchQuery = $lastUserMessage . " " . $input;
     }
 
-
-    // ----------------------------
+    // ============================
     // GOOGLE SEARCH
-    // ----------------------------
+    // ============================
     $searchSummary = googleSearch($searchQuery);
-    if (strpos($searchSummary, "Search API") === 0 || empty($searchSummary)) {
-        $searchSummary = "No search results available.";
+
+    if (!$searchSummary || strpos($searchSummary, "Failed") !== false) {
+        $searchSummary = "No reliable search results available.";
     }
 
-    // ----------------------------
-    // BUILD GPT MESSAGES WITH HISTORY
-    // ----------------------------
-    $gptMessages = [
-        ['role' => 'system', 'content' => 'You are a helpful AI assistant. Use the search results if relevant. Keep answers factual and concise.']
-    ];
+    // ============================
+    // BUILD INPUT WITH MEMORY
+    // ============================
+    $messages = array();
 
-    // Add conversation history
+    // system message
+    $messages[] = array(
+        "role" => "system",
+        "content" => "You are a helpful AI assistant. Use search results if relevant. Keep answers factual and concise."
+    );
+
+    // add conversation history
     foreach ($conversationHistory as $msg) {
-        $gptMessages[] = $msg;
+        $messages[] = array(
+            "role" => $msg['role'],
+            "content" => $msg['content']
+        );
     }
 
-    // Add current user message with search context
-    $gptMessages[] = [
-        'role' => 'user',
-        'content' => "Question: $input\n\nSearch results:\n$searchSummary\n\nProvide the best answer based on the question and search results."
-    ];
+    // add current message with search context
+    $messages[] = array(
+        "role" => "user",
+        "content" =>
+            "Question: " . $input . "\n\n" .
+            "Search results:\n" . $searchSummary . "\n\n" .
+            "Provide the best clear answer."
+    );
 
-    // ----------------------------
-    // GPT REQUEST
-    // ----------------------------
-    $payload = [
-        'model' => 'gpt-3.5-turbo',
-        'messages' => $gptMessages,
-        'temperature' => 0.3,
-        'max_tokens' => 512
-    ];
+    // ============================
+    // OPENAI RESPONSES API CALL
+    // ============================
+    $payload = array(
+        "model" => "gpt-4o-mini",
+        "input" => $messages,
+        "temperature" => 0.3,
+        "max_output_tokens" => 512
+    );
 
     $ch = curl_init();
-    curl_setopt_array($ch, [
-        CURLOPT_URL => "https://api.openai.com/v1/chat/completions",
+
+    curl_setopt_array($ch, array(
+        CURLOPT_URL => "https://api.openai.com/v1/responses",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
-        CURLOPT_HTTPHEADER => [
+        CURLOPT_HTTPHEADER => array(
             "Content-Type: application/json",
-            "Authorization: Bearer $OPENAI_API_KEY"
-        ],
+            "Authorization: Bearer " . $OPENAI_API_KEY
+        ),
         CURLOPT_POSTFIELDS => json_encode($payload)
-    ]);
+    ));
+
     $api_response = curl_exec($ch);
-    $error = curl_error($ch);
+
+    if (curl_errno($ch)) {
+        echo json_encode([
+            'error' => 'Curl error: ' . curl_error($ch)
+        ]);
+        curl_close($ch);
+        exit;
+    }
+
     curl_close($ch);
 
-    if ($error) {
-        echo json_encode(['error' => 'Curl error: ' . $error]);
-        exit;
-    }
-
     $responseData = json_decode($api_response, true);
-    if (!isset($responseData['choices'][0]['message']['content'])) {
-        echo json_encode(['error' => 'Invalid response from OpenAI']);
+
+    if (!isset($responseData['output'][0]['content'][0]['text'])) {
+        echo json_encode([
+            'error' => 'Invalid OpenAI response',
+            'debug' => $responseData
+        ]);
         exit;
     }
 
-    $ai_response = trim($responseData['choices'][0]['message']['content']);
+    $ai_response = trim($responseData['output'][0]['content'][0]['text']);
 
-    // ----------------------------
+    // ============================
     // SAVE TO DATABASE
-    // ----------------------------
-    $stmt = $pdo->prepare("INSERT INTO tbl_conversation (user_id, input_text, ai_response, created_at) VALUES (?, ?, ?, NOW())");
-    $stmt->execute([$user_id, $input, $ai_response]);
+    // ============================
+    $stmt = $pdo->prepare("
+        INSERT INTO tbl_conversation
+        (user_id, input_text, ai_response, created_at)
+        VALUES (?, ?, ?, NOW())
+    ");
 
-    // ----------------------------
-    // UPDATE SESSION MEMORY
-    // ----------------------------
-    $conversationHistory[] = ['role' => 'user', 'content' => $input];
-    $conversationHistory[] = ['role' => 'assistant', 'content' => $ai_response];
+    $stmt->execute(array(
+        $user_id,
+        $input,
+        $ai_response
+    ));
+
+    // ============================
+    // SAVE TO SESSION MEMORY
+    // ============================
+    $conversationHistory[] = array(
+        "role" => "user",
+        "content" => $input
+    );
+
+    $conversationHistory[] = array(
+        "role" => "assistant",
+        "content" => $ai_response
+    );
+
     $_SESSION['conversation_history'] = $conversationHistory;
-    $_SESSION['last_question'] = $input;
-    $_SESSION['last_bot'] = $ai_response;
 
-    // ----------------------------
+    // ============================
     // RETURN RESPONSE
-    // ----------------------------
-    echo json_encode([
-        'user' => htmlspecialchars($input),
-        'bot' => htmlspecialchars($ai_response),
-        'search_result' => nl2br(htmlspecialchars($searchSummary)),
-    ]);
+    // ============================
+    echo json_encode(array(
+        "user" => htmlspecialchars($input),
+        "bot" => htmlspecialchars($ai_response),
+        "search_result" => nl2br(htmlspecialchars($searchSummary))
+    ));
+
     exit;
 }
 
-echo json_encode(['error' => 'Invalid request']);
-?>
+// ============================
+// INVALID REQUEST
+// ============================
+echo json_encode(array(
+    "error" => "Invalid request"
+));

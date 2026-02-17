@@ -1,7 +1,7 @@
 <?php include('../includes/init.php');
 include('../theme/header.php');
 include "../includes/google-search-api/search-handler.php";
-$searchLimitReached = checkSearchLimit();
+$searchLimitReached = checkSearchLimit() === 100 ? true : false;
     
 
 ?>
@@ -51,12 +51,12 @@ canvas {
                                         <form class="needs-validation" novalidate="" name="chat-form" id="chat-form">
                                             <div class="row">
                                                 <div class="col-mb-12">
-                                                    <?php if ($searchLimitReached): ?>
+                                                    <?php if ($searchLimitReached){?>
                                                     <p class="text-warning">
                                                         ⚠️ Daily Google Search API limit (100) has been reached.
                                                         The assistant will still work, but without live search results.
                                                     </p>
-                                                    <?php endif; ?>
+                                                    <?php }?>
                                                 </div>
 
                                                 <div class="col mb-2 mb-sm-0">
@@ -204,7 +204,7 @@ $(function() {
         $.post('chatbot-handler.php', {
             message: message
         }, function(data) {
-            const res = JSON.parse(data);
+            console.log('chat finished');
             fetchMessages()
 
             // Now it's safe to access #chat-box

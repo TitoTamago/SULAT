@@ -5,9 +5,10 @@
     PHP 5.3 COMPATIBLE
    ============================================================ */
 
-$CACHE_DIR = __DIR__ . "/cache/";
-$CACHE_SECONDS = 3600; // 1 hour cache
-$CACHE_MAX_FILES = 500; // keep cache lightweight
+$CACHE_DIR = __DIR__ . "/cache/"; // existing
+$CACHE_SECONDS = 3600;            // 1 hour
+$CACHE_MAX_FILES = 500;           // max number of cache files
+
 
 /* ============================================================
     ENSURE CACHE FOLDER EXISTS
@@ -23,23 +24,23 @@ function autoCleanCache($CACHE_DIR, $CACHE_MAX_FILES) {
     $files = glob($CACHE_DIR . "*.json");
     if (count($files) <= $CACHE_MAX_FILES) return;
 
-    // sort by oldest
+    // sort oldest first
     usort($files, function($a, $b) {
         return filemtime($a) - filemtime($b);
     });
 
-    // delete oldest 30%
-    $deleteCount = intval(count($files) * 0.30);
+    $deleteCount = intval(count($files) * 0.3);
     for ($i = 0; $i < $deleteCount; $i++) {
         @unlink($files[$i]);
     }
 }
 
+
 /* ============================================================
     THE SEARCH FUNCTION
    ============================================================ */
 function googleSearch($query) {
-    global $CACHE_DIR, $CACHE_SECONDS;
+    global $CACHE_DIR, $CACHE_SECONDS, $CACHE_MAX_FILES;
 
     $query = trim($query);
     if ($query == "") return "Empty query.";
@@ -72,8 +73,8 @@ function googleSearch($query) {
     // Replace this with your real search provider
     // Example: SerpAPI curl request
     // -------------------------------------------------------------
-    $apiKey = "YOUR_GOOGLE_CUSTOM_SEARCH_API_KEY";
-    $cx     = "YOUR_CUSTOM_SEARCH_ENGINE_ID";
+    $apiKey = "AIzaSyDmkjSRo0sPT1BHJr0rLIM8s02YLGXE_jw";
+    $cx     = "1332a581dd3474b9c";
 
     $url = "https://www.googleapis.com/customsearch/v1?key=" . urlencode($apiKey) .
            "&cx=" . urlencode($cx) . "&q=" . urlencode($query);
@@ -137,13 +138,28 @@ function checkSearchLimit() {
     $DAILY_LIMIT = 100;
     $today       = date('Y-m-d');
 
-    if (!file_exists($LIMIT_FILE)) return false;
-
-    $usage = json_decode(file_get_contents($LIMIT_FILE), true);
-
-    if ($usage['date'] === $today && $usage['count'] >= $DAILY_LIMIT) {
+    if (!file_exists($LIMIT_FILE)) {
+        file_put_contents($LIMIT_FILE, json_encode(array(
+            "date" => $today,
+            "count" => 0
+        )));
         return true;
     }
 
-    return false;
+    $usage = json_decode(file_get_contents($LIMIT_FILE), true);
+
+    if ($usage['date'] !== $today) {
+        $usage['date'] = $today;
+        $usage['count'] = 0;
+    }
+
+    if ($usage['count'] >= $DAILY_LIMIT) {
+        return false;
+    }
+
+    $usage['count']++;
+
+    file_put_contents($LIMIT_FILE, json_encode($usage));
+
+    return true;
 }

@@ -1,14 +1,14 @@
 <?php
 
-$servername = "localhost:3307";
+$servername = "localhost:3306";
 $username = "root"; // Default for phpMyAdmin
-$password = "4bu5!RR]*jufGC1O"; // Leave blank if no password is set
+$password = ""; // Leave blank if no password is set
 $database = "sulat_project";
 
-$host = 'localhost:3307';       // or 127.0.0.1
+$host = 'localhost:3306';       // or 127.0.0.1
 $db   = 'sulat_project';   // change to your database name
 $user = 'root';            // default user for XAMPP
-$pass = '4bu5!RR]*jufGC1O';                // default password for XAMPP is empty
+$pass = '';                // default password for XAMPP is empty
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
